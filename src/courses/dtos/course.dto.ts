@@ -16,7 +16,7 @@ export class CreateCourseDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly category: string;
+  readonly categories: string;
 
   @IsString()
   @IsNotEmpty()

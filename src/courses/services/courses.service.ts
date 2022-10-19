@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 
 @Injectable()
@@ -24,4 +25,13 @@ export class CoursesService {
     return this.courses.find(item => item.id === id)
   }
 
+  createCourse(data: CreateCourseDto) {
+    this.counterId += 1;
+    const newCourse = {
+      id: this.counterId,
+      ...data,
+    }
+    this.courses.push(newCourse);
+    return newCourse;
+  }
 }
