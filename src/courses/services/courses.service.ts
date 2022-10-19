@@ -54,4 +54,14 @@ export class CoursesService {
     }
   }
 
+  deleteCourse(id: number): Course[] {
+    const courseToDelete = this.getCourse(id);
+    if (!courseToDelete) {
+      throw new NotFoundException(`Course with id #${id} not found`);
+    } else {
+      const newCourseArray: Course[] = this.courses.filter(course => course.id != id);
+      this.courses = newCourseArray;
+      return this.courses;
+    }
+  }
 }
