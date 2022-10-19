@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
 
@@ -9,5 +9,10 @@ export class CoursesController {
   @Get()
   findCourses(): Course[] {
     return this.coursesServices.getAllCourses();
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.coursesServices.getCourse(id);
   }
 }

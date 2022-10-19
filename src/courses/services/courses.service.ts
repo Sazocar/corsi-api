@@ -20,4 +20,8 @@ export class CoursesService {
     return this.courses;
   }
 
+  getCourse(id: number): Course {
+    return this.courses.find(item => item.id === id)
+  }
+
 }
