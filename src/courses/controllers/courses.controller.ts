@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { CreateCourseDto } from '../dtos/course.dto';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
 
@@ -13,12 +13,17 @@ export class CoursesController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number): Course {
     return this.coursesServices.getCourse(id);
   }
 
   @Post()
-  createCourse(@Body() payload: CreateCourseDto) {
+  createCourse(@Body() payload: CreateCourseDto): Course {
     return this.coursesServices.createCourse(payload);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: ParseIntPipe, @Body() payload: UpdateCourseDto): Course {
+    return this.coursesServices.updateCourse(+id, payload);
   }
 }
