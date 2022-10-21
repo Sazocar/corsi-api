@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Delete, Query, UseFilters } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
@@ -11,11 +11,17 @@ export class CoursesController {
   findCourses(): Course[] {
     return this.coursesServices.getAllCourses();
   }
+  
+  @Get('filter')
+  findByCategory(@Query('category') category: string): Course[] {
+    return this.coursesServices.getCourseByCategory(category);
+  }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): Course {
     return this.coursesServices.getCourse(id);
   }
+
 
   @Post()
   createCourse(@Body() payload: CreateCourseDto): Course {

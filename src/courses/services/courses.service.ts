@@ -30,6 +30,10 @@ export class CoursesService {
     }
   }
 
+  getCourseByCategory(category: string): Course[] {
+    return this.courses.filter(course => course.categories.toLowerCase() === category.toLowerCase());
+  }
+
   createCourse(data: CreateCourseDto): Course {
     this.counterId += 1;
     const newCourse = {
