@@ -1,19 +1,22 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
+import { created, published } from '../entities/statecourse';
 
 @Injectable()
 export class CoursesService {
-  private counterId: number = 1;
+  private counterId = 1;
   private courses: Course[] = [
     {
       id: 1,
       title: 'Curso Basico de NestJS',
-      description: 'Aprende desarrollo web con NestJS, el framework de Node.js con mayor crecimiento. Conoce la estructura de proyectos backend en JavaScript con arquitectura escalable y construye una API REST siguiendo buenas prácticas de integrabilidad de datos. Impulsa tu carrera profesional como backend developer con tu profesor Nicolas Molina.',
+      description:
+        'Aprende desarrollo web con NestJS, el framework de Node.js con mayor crecimiento. Conoce la estructura de proyectos backend en JavaScript con arquitectura escalable y construye una API REST siguiendo buenas prácticas de integrabilidad de datos. Impulsa tu carrera profesional como backend developer con tu profesor Nicolas Molina.',
       lessons: 'Lección 1',
-      categories: "Programacion",
+      categories: 'Programacion',
       keywords: 'nestjs',
-      state: 'Created'
+      state: new created(),
+      students: [],
     },
   ];
 
@@ -22,11 +25,11 @@ export class CoursesService {
   }
 
   getCourse(id: number): Course {
-    const course = this.courses.find(course => course.id === id);
+    const course = this.courses.find((course) => course.id === id);
     if (!course) {
       throw new NotFoundException(`Course with id #${id} not found`);
     } else {
-       return course;
+      return course;
     }
   }
 
@@ -35,7 +38,7 @@ export class CoursesService {
     const newCourse = {
       id: this.counterId,
       ...data,
-    }
+    };
     this.courses.push(newCourse);
     return newCourse;
   }
@@ -59,7 +62,9 @@ export class CoursesService {
     if (!courseToDelete) {
       throw new NotFoundException(`Course with id #${id} not found`);
     } else {
-      const newCourseArray: Course[] = this.courses.filter(course => course.id != id);
+      const newCourseArray: Course[] = this.courses.filter(
+        (course) => course.id != id,
+      );
       this.courses = newCourseArray;
       return this.courses;
     }
