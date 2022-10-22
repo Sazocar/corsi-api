@@ -15,12 +15,17 @@ export class LessonService {
     return newLesson;
   }
 
-  update(lesson: Lesson, payload: UpdateLessonDto) {
-    lesson = {
-      ...lesson,
+  update(id: number, lessons: Lesson[], payload: UpdateLessonDto) {
+    const lessonToUpdate = this.findOne(id, lessons);
+    if (!lessonToUpdate) {
+      throw new NotFoundException(`Not found ${id}`);
+    }
+    const index = lessons.findIndex((item) => item.id === id);
+    lessons[index] = {
+      ...lessonToUpdate,
       ...payload,
     };
-    return lesson;
+    return lessons[index];
   }
 
   remove(lessons: Lesson[], id: number) {

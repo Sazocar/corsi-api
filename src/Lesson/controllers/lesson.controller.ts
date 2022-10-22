@@ -38,15 +38,15 @@ export class LessonController {
     return course.lessons[course.lessons.length - 1];
   }
 
-  @Put()
+  @Put(':lessonId')
   update(
     @Param('coursesId', ParseIntPipe) courseId: number,
     @Param('lessonId', ParseIntPipe) lessonId: number,
     @Body() payload: UpdateLessonDto,
   ) {
-    const course = this.courseService.getCourse(courseId);
     return this.lessonService.update(
-      this.lessonService.findOne(lessonId, course.lessons),
+      lessonId,
+      this.courseService.getCourse(courseId).lessons,
       payload,
     );
   }
@@ -58,6 +58,6 @@ export class LessonController {
   ) {
     const course = this.courseService.getCourse(courseId);
     this.lessonService.remove(course.lessons, lessonId);
-    return course.lessons[course.lessons.length - 1];
+    return course.lessons;
   }
 }
