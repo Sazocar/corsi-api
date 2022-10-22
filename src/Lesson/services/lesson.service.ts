@@ -25,7 +25,8 @@ export class LessonService {
 
   remove(lessons: Lesson[], id: number) {
     const index = lessons.findIndex((item) => item.id === id);
-    if (index !== -1) {
+    console.log(index);
+    if (index === -1) {
       throw new NotFoundException(`Lesson ${id} not found`);
     }
     lessons.splice(index, 1);

@@ -30,7 +30,7 @@ export class LessonController {
 
   @Post()
   createLesson(
-    @Param('courseId', ParseIntPipe) courseId: number,
+    @Param('coursesId', ParseIntPipe) courseId: number,
     @Body() payload: CreateLessonDto,
   ) {
     const course = this.courseService.getCourse(courseId);
@@ -40,7 +40,7 @@ export class LessonController {
 
   @Put()
   update(
-    @Param('courseId', ParseIntPipe) courseId: number,
+    @Param('coursesId', ParseIntPipe) courseId: number,
     @Param('lessonId', ParseIntPipe) lessonId: number,
     @Body() payload: UpdateLessonDto,
   ) {
@@ -51,12 +51,13 @@ export class LessonController {
     );
   }
 
-  @Delete()
+  @Delete(':lessonId')
   delete(
-    @Param('courseId', ParseIntPipe) courseId: number,
+    @Param('coursesId', ParseIntPipe) courseId: number,
     @Param('lessonId', ParseIntPipe) lessonId: number,
   ) {
     const course = this.courseService.getCourse(courseId);
-    return this.lessonService.remove(course.lessons, lessonId);
+    this.lessonService.remove(course.lessons, lessonId);
+    return course.lessons[course.lessons.length - 1];
   }
 }
