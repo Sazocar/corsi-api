@@ -3,7 +3,7 @@ import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { Lesson } from '../Entities/Lesson';
 
 @Injectable()
-export class ServicesService {
+export class LessonService {
   private counterId = 0;
 
   create(payload: CreateLessonDto) {
