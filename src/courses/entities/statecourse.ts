@@ -24,7 +24,7 @@ export class Deleted implements StateCourse {
     return 'no se puede suscribir';
   }
 }
-export class suspended implements StateCourse {
+export class Suspended implements StateCourse {
   suscribe(student: Student) {
     return 'no se puede suscribir';
   }
