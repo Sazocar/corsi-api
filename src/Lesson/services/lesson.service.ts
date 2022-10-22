@@ -31,4 +31,16 @@ export class ServicesService {
     lessons.splice(index, 1);
     return lessons;
   }
+
+  findAll(lessons: Lesson[]) {
+    return lessons;
+  }
+
+  findOne(id: number, lessons: Lesson[]) {
+    const lesson = lessons.find((item) => item.id === id);
+    if (!lesson) {
+      throw new NotFoundException(`Lesson ${id} not found`);
+    }
+    return lesson;
+  }
 }
