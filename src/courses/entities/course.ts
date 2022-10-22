@@ -1,10 +1,11 @@
 import { student } from 'src/person/entities/student';
 import { statecourse } from './statecourse';
+import { Lesson } from 'src/Lesson/Entities/Lesson';
 export class Course {
   id: number;
   title: string;
   description: string;
-  lessons: string; // Should be an Lesson[] in the future
+  lessons: Lesson[] = [];
   categories: string; // Should be an Category[] in the future
   keywords: string;
   state: statecourse;
