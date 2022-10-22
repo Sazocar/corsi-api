@@ -1,6 +1,6 @@
 import { Course } from 'src/courses/entities/course';
 
-export abstract class person {
+export abstract class Person {
   id: number;
   courses?: Course[];
   name: string;

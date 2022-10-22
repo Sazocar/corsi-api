@@ -1,4 +1,4 @@
 import { Course } from 'src/courses/entities/course';
-import { person } from './person';
+import { Person } from './person';
 
-export class student extends person {}
+export class Student extends Person {}
