@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
+import { created, published } from '../entities/statecourse';
 
 @Injectable()
 export class CoursesService {
@@ -14,7 +15,8 @@ export class CoursesService {
       lessons: [],
       categories: 'Programacion',
       keywords: 'nestjs',
-      state: 'Created',
+      state: new created(),
+      students: [],
     },
   ];
 
