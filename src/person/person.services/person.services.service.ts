@@ -6,7 +6,7 @@ import { Student } from '../entities/student';
 import { NotFoundException } from '@nestjs/common/exceptions';
 
 @Injectable()
-export class PersonServicesService {
+export class PersonService {
   private counter = 1;
   private persons: Person[] = [];
 

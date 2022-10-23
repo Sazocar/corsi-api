@@ -9,15 +9,15 @@ import {
 } from '@nestjs/common';
 import { get } from 'http';
 import { Person } from '../entities/person';
-import { PersonServicesService } from '../person.services/person.services.service';
+import { PersonService } from '../person.services/person.services.service';
 import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 
 @Controller('person')
-export class PersonControllerController {
-  constructor(private service: PersonServicesService) {}
+export class PersonController {
+  constructor(private service: PersonService) {}
   @Get('getall')
-  getall() {
+  getAll() {
     return this.service.getAll();
   }
   @Get('id')

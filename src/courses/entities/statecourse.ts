@@ -1,13 +1,13 @@
 import { Course } from './course';
 import { Student } from 'src/person/entities/student';
-import { PersonServicesService } from 'src/person/person.services/person.services.service';
+import { PersonService } from 'src/person/person.services/person.services.service';
 import { Person } from 'src/person/entities/person';
 export interface StateCourse {
   suscribe(student: Student, course: Course);
 }
 
 export class Published implements StateCourse {
-  constructor(private service: PersonServicesService) {}
+  constructor(private service: PersonService) {}
   suscribe(student: Student, course: Course) {
     this.service.suscribeService(student, course);
   }
