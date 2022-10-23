@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { Course } from 'src/courses/entities/course';
-import { createpersondto, UpdatepersonDto } from '../dto/person.dto';
-import { person } from '../entities/person';
-import { student } from '../entities/student';
+import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
+import { Person } from '../entities/person';
+import { Student } from '../entities/student';
 import { NotFoundException } from '@nestjs/common/exceptions';
 
 @Injectable()
 export class PersonServicesService {
   private counter = 1;
-  private persons: person[] = [];
+  private persons: Person[] = [];
 
-  suscribeservice(student: student, course: Course) {
+  suscribeService(student: Student, course: Course) {
     student.courses.push(course);
     course.students.push(student);
   }
 
-  createperson(data: createpersondto) {
+  createPerson(data: CreatePersonDto) {
     this.counter += 1;
     const newperson = {
       id: this.counter,
@@ -25,7 +25,7 @@ export class PersonServicesService {
     return newperson;
   }
 
-  getperson(id: number): person {
+  getPerson(id: number): Person {
     const person = this.persons.find((person) => person.id === id);
     if (!person) {
       throw new NotFoundException(`Course with id #${id} not found`);
@@ -33,24 +33,24 @@ export class PersonServicesService {
       return person;
     }
   }
-  getall() {
+  getAll() {
     return this.persons;
   }
 
-  deletperson(id: number): person[] {
-    const persontodelete = this.getperson(id);
+  deletperson(id: number): Person[] {
+    const persontodelete = this.getPerson(id);
     if (!persontodelete) {
       throw new NotFoundException(`person with id #${id} not found`);
     } else {
-      const newpersonArray: person[] = this.persons.filter(
+      const newpersonArray: Person[] = this.persons.filter(
         (person) => person.id != id,
       );
       this.persons = newpersonArray;
       return this.persons;
     }
   }
-  updateperson(id: number, changes: UpdatepersonDto): person {
-    const personToUpdate = this.getperson(id);
+  updateperson(id: number, changes: UpdatePersonDto): Person {
+    const personToUpdate = this.getPerson(id);
     if (!personToUpdate) {
       throw new NotFoundException(`person with id #${id} not found`);
     } else {

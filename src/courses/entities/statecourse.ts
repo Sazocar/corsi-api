@@ -9,7 +9,7 @@ export interface StateCourse {
 export class Published implements StateCourse {
   constructor(private service: PersonServicesService) {}
   suscribe(student: Student, course: Course) {
-    this.service.suscribeservice(student, course);
+    this.service.suscribeService(student, course);
   }
 }
 

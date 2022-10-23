@@ -1,8 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
-import { IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsString, IsBoolean } from 'class-validator';
 import { Course } from 'src/courses/entities/course';
-export class createpersondto {
+export class CreatePersonDto {
   readonly courses?: Course[];
   @IsString()
   @IsNotEmpty()
@@ -14,4 +13,4 @@ export class createpersondto {
   readonly IsActive: boolean;
 }
 
-export class UpdatepersonDto extends PartialType(createpersondto) {}
+export class UpdatePersonDto extends PartialType(CreatePersonDto) {}
