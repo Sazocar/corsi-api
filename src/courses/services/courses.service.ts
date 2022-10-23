@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Lesson } from 'src/Lesson/Entities/Lesson';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
-import { Created, Published } from '../entities/statecourse';
+import { Created, Published, StateCourse } from '../entities/statecourse';
 
 @Injectable()
 export class CoursesService {
@@ -35,7 +36,9 @@ export class CoursesService {
 
   createCourse(data: CreateCourseDto): Course {
     this.counterId += 1;
+    const statec: StateCourse = new Created();
     const newCourse = {
+      state: statec,
       id: this.counterId,
       ...data,
     };
@@ -44,6 +47,19 @@ export class CoursesService {
   }
 
   updateCourse(id: number, changes: UpdateCourseDto): Course {
+    const courseToUpdate = this.getCourse(id);
+    if (!courseToUpdate) {
+      throw new NotFoundException(`Course with id #${id} not found`);
+    } else {
+      const index = this.courses.findIndex((item) => item.id === id);
+      this.courses[index] = {
+        ...courseToUpdate,
+        ...changes,
+      };
+      return this.courses[index];
+    }
+  }
+  ChangeState(id: number, changes: StateCourse): Course {
     const courseToUpdate = this.getCourse(id);
     if (!courseToUpdate) {
       throw new NotFoundException(`Course with id #${id} not found`);

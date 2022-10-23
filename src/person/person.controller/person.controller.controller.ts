@@ -18,15 +18,15 @@ export class PersonController {
   constructor(private service: PersonService) {}
   @Get('getall')
   getAll() {
-    return this.service.getAll();
+    return this.service.GetAll();
   }
   @Get('id')
   findOne(@Param('id', ParseIntPipe) id: number): Person {
-    return this.service.getPerson(id);
+    return this.service.GetPerson(id);
   }
   @Post()
   createPerson(@Body() payload: CreatePersonDto): Person {
-    return this.service.createPerson(payload);
+    return this.service.createperson(payload);
   }
 
   @Put(':id')
@@ -39,6 +39,6 @@ export class PersonController {
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number): Person[] {
-    return this.service.deletPerson(id);
+    return this.service.DeletPerson(id);
   }
 }

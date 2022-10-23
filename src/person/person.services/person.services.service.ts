@@ -4,18 +4,22 @@ import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { Person } from '../entities/person';
 import { Student } from '../entities/student';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { CoursesService } from 'src/courses/services/courses.service';
 
 @Injectable()
 export class PersonService {
   private counter = 1;
   private persons: Person[] = [];
+  constructor(private CourService: CoursesService) {}
 
-  suscribeService(student: Student, course: Course) {
-    student.courses.push(course);
-    course.students.push(student);
+  SuscribeService(studentid: number, courseid: number) {
+    const a = this.GetPerson(studentid);
+    const b = this.CourService.getCourse(courseid);
+    a.courses.push(b);
+    b.students.push(a);
   }
 
-  createPerson(data: CreatePersonDto) {
+  createperson(data: CreatePersonDto) {
     this.counter += 1;
     const newperson = {
       id: this.counter,
@@ -25,7 +29,7 @@ export class PersonService {
     return newperson;
   }
 
-  getPerson(id: number): Person {
+  GetPerson(id: number): Person {
     const person = this.persons.find((person) => person.id === id);
     if (!person) {
       throw new NotFoundException(`Course with id #${id} not found`);
@@ -33,12 +37,12 @@ export class PersonService {
       return person;
     }
   }
-  getAll() {
+  GetAll() {
     return this.persons;
   }
 
-  deletPerson(id: number): Person[] {
-    const persontodelete = this.getPerson(id);
+  DeletPerson(id: number): Person[] {
+    const persontodelete = this.GetPerson(id);
     if (!persontodelete) {
       throw new NotFoundException(`person with id #${id} not found`);
     } else {
@@ -50,7 +54,7 @@ export class PersonService {
     }
   }
   updatePerson(id: number, changes: UpdatePersonDto): Person {
-    const personToUpdate = this.getPerson(id);
+    const personToUpdate = this.GetPerson(id);
     if (!personToUpdate) {
       throw new NotFoundException(`person with id #${id} not found`);
     } else {

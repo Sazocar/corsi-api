@@ -18,22 +18,17 @@ export class CreateCourseDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
+  readonly categories: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
   readonly lessons: Lesson[];
 
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  readonly categories: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
   readonly keywords: string;
-
-  @IsString()
-  @IsNotEmpty()
   @ApiProperty()
-  readonly state: StateCourse;
   readonly students: Student[];
 }
 
