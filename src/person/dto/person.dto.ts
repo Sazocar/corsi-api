@@ -10,7 +10,7 @@ export class CreatePersonDto {
   @IsNotEmpty()
   readonly surname: string;
   @IsBoolean()
-  readonly IsActive: boolean;
+  readonly isActive: boolean;
 }
 
 export class UpdatePersonDto extends PartialType(CreatePersonDto) {}

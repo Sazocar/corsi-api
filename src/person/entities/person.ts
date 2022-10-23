@@ -5,5 +5,5 @@ export abstract class Person {
   courses?: Course[];
   name: string;
   surname: string;
-  IsActive: boolean;
+  isActive: boolean;
 }
