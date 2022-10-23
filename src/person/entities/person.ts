@@ -1,5 +1,4 @@
 import { Course } from 'src/courses/entities/course';
-
 export abstract class Person {
   id: number;
   courses?: Course[];
