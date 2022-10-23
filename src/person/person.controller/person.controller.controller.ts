@@ -34,11 +34,11 @@ export class PersonController {
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdatePersonDto,
   ): Person {
-    return this.service.updateperson(id, payload);
+    return this.service.updatePerson(id, payload);
   }
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number): Person[] {
-    return this.service.deletperson(id);
+    return this.service.deletPerson(id);
   }
 }

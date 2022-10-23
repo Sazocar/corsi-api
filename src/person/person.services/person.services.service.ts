@@ -37,7 +37,7 @@ export class PersonService {
     return this.persons;
   }
 
-  deletperson(id: number): Person[] {
+  deletPerson(id: number): Person[] {
     const persontodelete = this.getPerson(id);
     if (!persontodelete) {
       throw new NotFoundException(`person with id #${id} not found`);
@@ -49,7 +49,7 @@ export class PersonService {
       return this.persons;
     }
   }
-  updateperson(id: number, changes: UpdatePersonDto): Person {
+  updatePerson(id: number, changes: UpdatePersonDto): Person {
     const personToUpdate = this.getPerson(id);
     if (!personToUpdate) {
       throw new NotFoundException(`person with id #${id} not found`);
