@@ -15,7 +15,6 @@ export class CreateCourseDto {
   @ApiProperty()
   readonly description: string;
 
-  @IsString()
   @IsNotEmpty()
   @ApiProperty()
   readonly lessons: Lesson[];
@@ -30,7 +29,6 @@ export class CreateCourseDto {
   @ApiProperty()
   readonly keywords: string;
 
-  @IsString()
   @IsNotEmpty()
   @ApiProperty()
   readonly state: StateCourse;
