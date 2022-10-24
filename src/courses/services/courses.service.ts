@@ -15,13 +15,12 @@ export class CoursesService {
     return this.courseRepo.find();
   }
 
-  getCourse(id: number) {
-    const course = this.courseRepo.findOneBy({ id: id });
+  async getCourse(id: number) {
+    const course = await this.courseRepo.findOneBy({ id: id });
     if (!course) {
       throw new NotFoundException(`Course with id #${id} not found`);
-    } else {
-      return course;
     }
+    return course;
   }
 
   createCourse(data: CreateCourseDto) {

@@ -9,13 +9,13 @@ import { LessonService } from '../services/lesson.service';
 export class LessonController {
   constructor(
     private lessonService: LessonService,
-    /*private courseService: CoursesService,*/
+    private courseService: CoursesService,
   ) {}
 
-  /*@Get()
+  @Get()
   getLessons(@Param('coursesId', ParseIntPipe) coursesId: number) {
     const course = this.courseService.getCourse(coursesId);
-    return this.lessonService.findAll(course.lessons);
+    return this.lessonService.findAll();
   }
 
   @Get(':lessonId')
@@ -24,11 +24,11 @@ export class LessonController {
     @Param('lessonId', ParseIntPipe) lessonId: number,
   ) {
     const course = this.courseService.getCourse(coursesId);
-    const lesson = this.lessonService.findOne(lessonId, course.lessons);
+    const lesson = this.lessonService.findOne(lessonId);
     return lesson;
   }
 
-  @Post()
+  /*@Post()
   createLesson(
     @Param('coursesId', ParseIntPipe) courseId: number,
     @Body() payload: CreateLessonDto,

@@ -1,7 +1,14 @@
 import { Student } from 'src/person/entities/student';
 import { StateCourse } from './statecourse';
 import { Lesson } from 'src/Lesson/Entities/Lesson';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Course {
@@ -14,7 +21,8 @@ export class Course {
   @Column({ type: 'text' })
   description: string;
 
-  lessons: Lesson[] = [];
+  @OneToMany(() => Lesson, (lesson) => lesson.course)
+  lessons: Lesson[];
 
   @Column()
   categories: string; // Should be an Category[] in the future
@@ -25,4 +33,16 @@ export class Course {
   state: StateCourse;
 
   students: Student[];
+
+  @CreateDateColumn({
+    type: 'timestamptz',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  createAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamptz',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  updateAt: Date;
 }

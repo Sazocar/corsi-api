@@ -1,52 +1,45 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Injectable,
+  NotFoundException,
+  Inject,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm/dist';
+import { CoursesService } from 'src/courses/services/courses.service';
+import { Repository } from 'typeorm';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { Lesson } from '../Entities/Lesson';
 
 @Injectable()
 export class LessonService {
-  private counterId = 0;
+  constructor(
+    @InjectRepository(Lesson) private lessonRepo: Repository<Lesson>,
+  ) {}
 
   create(payload: CreateLessonDto) {
-    const newLesson = {
-      id: this.counterId,
-      ...payload,
-    };
-    this.counterId += 1;
+    const newLesson = this.lessonRepo.create(payload);
     return newLesson;
   }
 
-  /*update(id: number, lessons: Lesson[], payload: UpdateLessonDto) {
-    const lessonToUpdate = this.findOne(id, lessons);
-    if (!lessonToUpdate) {
-      throw new NotFoundException(`Not found ${id}`);
-    }
-    const index = lessons.findIndex((item) => item.id === id);
-    lessons[index] = {
-      ...lessonToUpdate,
-      ...payload,
-    };
-    return lessons[index];
+  async update(id: number, payload: UpdateLessonDto) {
+    const lesson = await this.lessonRepo.findOneBy({ id: id });
+    this.lessonRepo.merge(lesson, payload);
+    return this.lessonRepo.save(lesson);
   }
 
-  remove(lessons: Lesson[], id: number) {
-    const index = lessons.findIndex((item) => item.id === id);
-    console.log(index);
-    if (index === -1) {
-      throw new NotFoundException(`Lesson ${id} not found`);
-    }
-    lessons.splice(index, 1);
-    return lessons;
+  remove(id: number) {
+    return this.lessonRepo.delete(id);
   }
 
-  findAll(lessons: Lesson[]) {
-    return lessons;
+  findAll() {
+    return this.lessonRepo.find();
   }
 
-  findOne(id: number, lessons: Lesson[]) {
-    const lesson = lessons.find((item) => item.id === id);
+  async findOne(id: number) {
+    const lesson = await this.lessonRepo.findOneBy({ id: id });
     if (!lesson) {
       throw new NotFoundException(`Lesson ${id} not found`);
     }
     return lesson;
-  }*/
+  }
 }
