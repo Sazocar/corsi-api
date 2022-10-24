@@ -14,15 +14,24 @@ import { Lesson } from '../Entities/Lesson';
 export class LessonService {
   constructor(
     @InjectRepository(Lesson) private lessonRepo: Repository<Lesson>,
+    private coursesService: CoursesService,
   ) {}
 
-  create(payload: CreateLessonDto) {
+  async create(payload: CreateLessonDto) {
     const newLesson = this.lessonRepo.create(payload);
-    return newLesson;
+    if (payload.courseId) {
+      const course = await this.coursesService.getCourse(payload.courseId); //Esto es una promesa
+      newLesson.course = course;
+    }
+    return this.lessonRepo.save(newLesson);
   }
 
   async update(id: number, payload: UpdateLessonDto) {
     const lesson = await this.lessonRepo.findOneBy({ id: id });
+    if (payload.courseId) {
+      const course = await this.coursesService.getCourse(payload.courseId); //Esto es una promesa
+      lesson.course = course;
+    }
     this.lessonRepo.merge(lesson, payload);
     return this.lessonRepo.save(lesson);
   }

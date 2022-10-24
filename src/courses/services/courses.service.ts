@@ -12,7 +12,9 @@ export class CoursesService {
   ) {}
 
   getAllCourses() {
-    return this.courseRepo.find();
+    return this.courseRepo.find({
+      relations: ['lessons'],
+    });
   }
 
   async getCourse(id: number) {

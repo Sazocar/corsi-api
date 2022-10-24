@@ -1,63 +1,38 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { Body, Delete, Post, Put } from '@nestjs/common/decorators';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
-import { CoursesService } from 'src/courses/services/courses.service';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
-@Controller('courses/:coursesId/lessons')
+@Controller('lessons')
 export class LessonController {
-  constructor(
-    private lessonService: LessonService,
-    private courseService: CoursesService,
-  ) {}
+  constructor(private lessonService: LessonService) {}
 
   @Get()
-  getLessons(@Param('coursesId', ParseIntPipe) coursesId: number) {
-    const course = this.courseService.getCourse(coursesId);
+  getLessons() {
     return this.lessonService.findAll();
   }
 
   @Get(':lessonId')
-  getLesson(
-    @Param('coursesId', ParseIntPipe) coursesId: number,
-    @Param('lessonId', ParseIntPipe) lessonId: number,
-  ) {
-    const course = this.courseService.getCourse(coursesId);
-    const lesson = this.lessonService.findOne(lessonId);
-    return lesson;
+  getLesson(@Param('lessonId', ParseIntPipe) lessonId: number) {
+    return this.lessonService.findOne(lessonId);
   }
 
-  /*@Post()
-  createLesson(
-    @Param('coursesId', ParseIntPipe) courseId: number,
-    @Body() payload: CreateLessonDto,
-  ) {
-    const course = this.courseService.getCourse(courseId);
-    course.lessons.push(this.lessonService.create(payload));
-    return course.lessons[course.lessons.length - 1];
+  @Post()
+  createLesson(@Body() payload: CreateLessonDto) {
+    return this.lessonService.create(payload);
   }
 
   @Put(':lessonId')
   update(
-    @Param('coursesId', ParseIntPipe) courseId: number,
     @Param('lessonId', ParseIntPipe) lessonId: number,
     @Body() payload: UpdateLessonDto,
   ) {
-    return this.lessonService.update(
-      lessonId,
-      this.courseService.getCourse(courseId).lessons,
-      payload,
-    );
+    return this.lessonService.update(lessonId, payload);
   }
 
   @Delete(':lessonId')
-  delete(
-    @Param('coursesId', ParseIntPipe) courseId: number,
-    @Param('lessonId', ParseIntPipe) lessonId: number,
-  ) {
-    const course = this.courseService.getCourse(courseId);
-    this.lessonService.remove(course.lessons, lessonId);
-    return course.lessons;
-  }*/
+  delete(@Param('lessonId', ParseIntPipe) lessonId: number) {
+    return this.lessonService.remove(lessonId);
+  }
 }
