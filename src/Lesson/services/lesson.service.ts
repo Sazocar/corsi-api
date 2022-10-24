@@ -15,7 +15,7 @@ export class LessonService {
     return newLesson;
   }
 
-  update(id: number, lessons: Lesson[], payload: UpdateLessonDto) {
+  /*update(id: number, lessons: Lesson[], payload: UpdateLessonDto) {
     const lessonToUpdate = this.findOne(id, lessons);
     if (!lessonToUpdate) {
       throw new NotFoundException(`Not found ${id}`);
@@ -48,5 +48,5 @@ export class LessonService {
       throw new NotFoundException(`Lesson ${id} not found`);
     }
     return lesson;
-  }
+  }*/
 }

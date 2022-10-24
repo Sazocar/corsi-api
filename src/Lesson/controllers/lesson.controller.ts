@@ -9,10 +9,10 @@ import { LessonService } from '../services/lesson.service';
 export class LessonController {
   constructor(
     private lessonService: LessonService,
-    private courseService: CoursesService,
+    /*private courseService: CoursesService,*/
   ) {}
 
-  @Get()
+  /*@Get()
   getLessons(@Param('coursesId', ParseIntPipe) coursesId: number) {
     const course = this.courseService.getCourse(coursesId);
     return this.lessonService.findAll(course.lessons);
@@ -59,5 +59,5 @@ export class LessonController {
     const course = this.courseService.getCourse(courseId);
     this.lessonService.remove(course.lessons, lessonId);
     return course.lessons;
-  }
+  }*/
 }
