@@ -14,7 +14,7 @@ export class Person {
   @Column()
   email: string;
   @Column()
-  phone: number;
+  phone?: number;
   @Column()
   isActive: boolean;
 }

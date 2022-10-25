@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
@@ -24,6 +25,15 @@ export class CoursesController {
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.getCourse(id);
+  }
+
+  @Get('/categories/:category')
+  findcategory(@Param('category') category: string) {
+    return this.coursesServices.getCoursebycategory(category);
+  }
+  @Get('/keyword/:keyword')
+  findkeyword(@Param('keyword') keyword: string) {
+    return this.coursesServices.getCoursebykeyword(keyword);
   }
 
   @Post()
