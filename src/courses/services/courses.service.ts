@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { SmsService } from 'src/mensaje/mensaje.service';
+import { Student } from 'src/person/entities/student';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
-import { Created, Published } from '../entities/statecourse';
+import { Created, Published, StateCourse } from '../entities/statecourse';
+import { Person } from '../../person/entities/person';
 
 @Injectable()
 export class CoursesService {
+  protected smsService: SmsService;
   private counterId = 1;
   private courses: Course[] = [
     {
@@ -16,7 +20,7 @@ export class CoursesService {
       categories: 'Programacion',
       keywords: 'nestjs',
       state: new Created(),
-      students: [],
+      students: [new Student()],
     },
   ];
 
@@ -45,6 +49,28 @@ export class CoursesService {
 
   updateCourse(id: number, changes: UpdateCourseDto): Course {
     const courseToUpdate = this.getCourse(id);
+
+    if (!courseToUpdate) {
+      throw new NotFoundException(`Course with id #${id} not found`);
+    } else {
+      const index = this.courses.findIndex((item) => item.id === id);
+      this.courses[index] = {
+        ...courseToUpdate,
+        ...changes,
+      };
+      return this.courses[index];
+    }
+  }
+  ChangeState(id: number, changes: StateCourse): Course {
+    const courseToUpdate = this.getCourse(id);
+    console.log('paso 1');
+    for (const a of courseToUpdate.students) {
+      this.smsService.initiatePhoneNumberVerification(
+        a.cellNumber,
+        'no se puede suscribir',
+      );
+    }
+    console.log('paso 2');
     if (!courseToUpdate) {
       throw new NotFoundException(`Course with id #${id} not found`);
     } else {

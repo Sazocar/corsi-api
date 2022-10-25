@@ -6,4 +6,5 @@ export abstract class Person {
   name: string;
   surname: string;
   isActive: boolean;
+  cellNumber = '+584265821398';
 }

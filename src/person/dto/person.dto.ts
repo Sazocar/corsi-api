@@ -11,6 +11,9 @@ export class CreatePersonDto {
   readonly surname: string;
   @IsBoolean()
   readonly isActive: boolean;
+  @IsString()
+  @IsNotEmpty()
+  readonly cellNumber: string;
 }
 
 export class UpdatePersonDto extends PartialType(CreatePersonDto) {}
