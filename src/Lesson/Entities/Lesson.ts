@@ -31,6 +31,6 @@ export class Lesson {
   })
   updateAt: Date;
 
-  @ManyToOne(() => Course, (course) => course.lessons)
+  @ManyToOne(() => Course, (course) => course.lessons, { onDelete: 'CASCADE' })
   course: Course;
 }
