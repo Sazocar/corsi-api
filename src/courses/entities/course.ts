@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Suscribed } from 'src/suscribe/Entities/suscribed';
 
 @Entity()
 export class Course {
@@ -33,8 +34,8 @@ export class Course {
   @Column()
   state: string;
 
-  @ManyToMany(() => Person, (person) => person.courses)
-  students?: Person[];
+  @OneToMany(() => Suscribed, (suscribed) => suscribed.course)
+  suscribeds: Suscribed[];
 
   @CreateDateColumn({
     type: 'timestamptz',

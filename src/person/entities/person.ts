@@ -1,9 +1,11 @@
 import { Course } from 'src/courses/entities/course';
+import { Suscribed } from 'src/suscribe/Entities/suscribed';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,8 +15,8 @@ export class Person {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToMany(() => Course, (course) => course.students)
-  courses?: Course[];
+  @OneToMany(() => Suscribed, (suscribed) => suscribed.person)
+  suscribed: Suscribed[];
 
   @Column()
   name: string;
