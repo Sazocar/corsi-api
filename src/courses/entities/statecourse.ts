@@ -1,4 +1,4 @@
-import { Course } from './course';
+/*import { Course } from './course';
 import { Student } from 'src/person/entities/student';
 import { PersonService } from 'src/person/person.services/person.services.service';
 import { Person } from 'src/person/entities/person';
@@ -29,3 +29,4 @@ export class Suspended implements StateCourse {
     return 'no se puede suscribir';
   }
 }
+*/

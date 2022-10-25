@@ -16,16 +16,16 @@ import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 @Controller('person')
 export class PersonController {
   constructor(private service: PersonService) {}
-  @Get('getall')
-  getAll() {
+  @Get()
+  findperson() {
     return this.service.getAll();
   }
-  @Get()
-  findOne(@Param('id', ParseIntPipe) id: number): Person {
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.getPerson(id);
   }
   @Post()
-  createPerson(@Body() payload: CreatePersonDto): Person {
+  createPerson(@Body() payload: CreatePersonDto) {
     return this.service.createPerson(payload);
   }
 
@@ -33,12 +33,12 @@ export class PersonController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdatePersonDto,
-  ): Person {
+  ) {
     return this.service.updatePerson(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Person[] {
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.service.deletPerson(id);
   }
 }
