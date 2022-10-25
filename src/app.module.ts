@@ -15,18 +15,18 @@ import { CourseModule } from './courses/course.module';
     imports: [ConfigModule],
     useFactory: async (config: ConfigService) => ({
       transport: {
-        host: 'smtp.sendgrid.net',
+        host: config.get('EMAIL_HOST'),
         secure: false,
         auth: {
-          user: 'apikey',
-          pass: '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',
+          user: config.get('EMAIL_USER'),
+          pass: config.get('EMAIL_PASSWORD'),
         },
       },
       defaults: {
         from: '<sendgrid_from_email_address>'
       },
       template: {
-        dir: join(__dirname, './mail/templates'),
+        dir: join(__dirname, './templates'),
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true

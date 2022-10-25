@@ -8,6 +8,6 @@ export class MailController {
 
     @Post('send')
     async sendEmail() {
-        return await this.mailService.sendMail("jimenezguillermo1208@gmail.com", "Guillermo");
+        return await this.mailService.sendMail("brayangt1710@hotmail.com", "brayan");
     }
 }

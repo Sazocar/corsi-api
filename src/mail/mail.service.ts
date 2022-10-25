@@ -1,23 +1,19 @@
-/* eslint-disable prettier/prettier */
-import { MailerService } from "@nestjs-modules/mailer";
-import { Injectable } from "@nestjs/common";
-import { template } from "handlebars";
-import path from "path";
+import { MailerService } from '@nestjs-modules/mailer';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MailService {
-    constructor(private mailerService: MailerService) {}
+  constructor(private mailerService: MailerService) {}
 
-    async sendMail(email: string, name: string) {
-        console.log(email)
-        await this.mailerService.sendMail({
-            to: email,
-            from: "bjgamboa.19@est.ucab.edu.ve",
-            subject: 'Greeting from NestJS NodeMailer',
-            template: "./email",
-            context: {
-                name: name
-            }
-        })
-    }
+  async sendMail(email: string, name: string) {
+    console.log(email);
+    await this.mailerService.sendMail({
+      to: email,
+      subject: 'Greeting from NestJS NodeMailer',
+      template: '/email',
+      context: {
+        name: name,
+      },
+    });
+  }
 }
