@@ -11,9 +11,7 @@ import {
 } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
-import { Published } from '../entities/statecourse';
 import { CoursesService } from '../services/courses.service';
-import { Deleted, Created, Suspended } from '../entities/statecourse';
 import { SuscribeService } from 'src/suscribe/service/service.service';
 
 @Controller('courses')
@@ -55,7 +53,7 @@ export class CoursesController {
     return this.coursesServices.updateCourse(id, payload);
   }
 
-  @Put(':id/changestate/deleted')
+  /*@Put(':id/changestate/deleted')
   changestated(@Param('id', ParseIntPipe) id: number): Course {
     const Aux = new Deleted();
     return this.coursesServices.ChangeState(id, Aux);
@@ -71,7 +69,7 @@ export class CoursesController {
   changestates(@Param('id', ParseIntPipe) id: number): Course {
     const Aux = new Suspended();
     return this.coursesServices.ChangeState(id, Aux);
-  }
+  }*/
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
