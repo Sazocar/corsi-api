@@ -7,9 +7,10 @@ import { PersonService } from './person/person.services/person.services.service'
 import { LessonModule } from './Lesson/lesson.module';
 import { DatabaseModule } from './database/database.module';
 import { PersonModule } from './person/person.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [CourseModule, LessonModule, DatabaseModule, PersonModule],
+  imports: [CourseModule, LessonModule, DatabaseModule, PersonModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

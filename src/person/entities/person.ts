@@ -20,7 +20,7 @@ export class Person {
   name: string;
 
   @Column()
-  surname: string;
+  lastName: string;
 
   @Column()
   email: string;

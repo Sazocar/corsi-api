@@ -13,18 +13,22 @@ export class CreatePersonDto {
   @IsNotEmpty()
   @ApiProperty()
   readonly name: string;
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  readonly surname: string;
+  readonly lastName: string;
+
   @IsBoolean()
   @IsNotEmpty()
   @ApiProperty()
   readonly isActive: boolean;
+
   @IsEmail()
   @IsNotEmpty()
   @ApiProperty()
   readonly email: string;
+
   @IsNotEmpty()
   @ApiProperty()
   readonly phone: number;
