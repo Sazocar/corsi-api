@@ -23,17 +23,17 @@ export class CoursesController {
   ) {}
 
   @Get()
-  findCourses(): Course[] {
+  findCourses() {
     return this.coursesServices.getAllCourses();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Course {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.getCourse(id);
   }
 
   @Post()
-  createCourse(@Body() payload: CreateCourseDto): Course {
+  createCourse(@Body() payload: CreateCourseDto) {
     return this.coursesServices.createCourse(payload);
   }
 
@@ -41,7 +41,7 @@ export class CoursesController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateCourseDto,
-  ): Course {
+  ) {
     return this.coursesServices.updateCourse(id, payload);
   }
 
@@ -64,7 +64,7 @@ export class CoursesController {
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Course[] {
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.deleteCourse(id);
   }
 }
