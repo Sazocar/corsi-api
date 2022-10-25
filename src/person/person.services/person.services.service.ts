@@ -3,67 +3,43 @@ import { Course } from 'src/courses/entities/course';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { Person } from '../entities/person';
 import { Student } from '../entities/student';
+import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common/exceptions';
-import { CoursesService } from 'src/courses/services/courses.service';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PersonService {
-  private counter = 1;
-  private persons: Person[] = [];
-  constructor(private CourService: CoursesService) {}
+  constructor(
+    @InjectRepository(Person) private personRepo: Repository<Person>,
+  ) {}
 
-  SuscribeService(studentid: number, courseid: number) {
-    const a = this.GetPerson(studentid);
-    const b = this.CourService.getCourse(courseid);
-    a.courses.push(b);
-    b.students.push(a);
+  /* suscribeService(student: Student, course: Course) {
+    student.courses.push(course);
+    course.students.push(student);
+  }*/
+
+  createPerson(data: CreatePersonDto) {
+    const newperson = this.personRepo.create(data);
+    return this.personRepo.save(newperson);
   }
 
-  createperson(data: CreatePersonDto) {
-    this.counter += 1;
-    const newperson = {
-      id: this.counter,
-      ...data,
-    };
-    this.persons.push(newperson);
-    return newperson;
-  }
-
-  GetPerson(id: number): Person {
-    const person = this.persons.find((person) => person.id === id);
+  async getPerson(id: number) {
+    const person = await this.personRepo.findOneBy({ id: id });
     if (!person) {
-      throw new NotFoundException(`Course with id #${id} not found`);
-    } else {
-      return person;
+      throw new NotFoundException(`Person with id #${id} not found`);
     }
+    return person;
   }
-  GetAll() {
-    return this.persons;
+  getAll() {
+    return this.personRepo.find();
   }
 
-  DeletPerson(id: number): Person[] {
-    const persontodelete = this.GetPerson(id);
-    if (!persontodelete) {
-      throw new NotFoundException(`person with id #${id} not found`);
-    } else {
-      const newpersonArray: Person[] = this.persons.filter(
-        (person) => person.id != id,
-      );
-      this.persons = newpersonArray;
-      return this.persons;
-    }
+  deletPerson(id: number) {
+    return this.personRepo.delete(id);
   }
-  updatePerson(id: number, changes: UpdatePersonDto): Person {
-    const personToUpdate = this.GetPerson(id);
-    if (!personToUpdate) {
-      throw new NotFoundException(`person with id #${id} not found`);
-    } else {
-      const index = this.persons.findIndex((person) => person.id === id);
-      this.persons[index] = {
-        ...personToUpdate,
-        ...changes,
-      };
-      return this.persons[index];
-    }
+  async updatePerson(id: number, changes: UpdatePersonDto) {
+    const person = await this.personRepo.findOneBy({ id: id });
+    this.personRepo.merge(person, changes);
+    return this.personRepo.save(person);
   }
 }

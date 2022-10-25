@@ -1,16 +1,10 @@
-import { Student } from 'src/person/entities/student';
-import {
-  StateCourse,
-  Created,
-  Published,
-  Deleted,
-  Suspended,
-} from './statecourse';
+import { Person } from 'src/person/entities/person';
 import { Lesson } from 'src/Lesson/Entities/Lesson';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -36,9 +30,11 @@ export class Course {
   @Column()
   keywords: string;
 
-  state: StateCourse;
+  @Column()
+  state: string;
 
-  students: Student[];
+  @ManyToMany(() => Person, (person) => person.courses)
+  students?: Person[];
 
   @CreateDateColumn({
     type: 'timestamptz',
