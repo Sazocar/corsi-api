@@ -24,6 +24,28 @@ export class CoursesService {
     return course;
   }
 
+  async getCoursebycategory(categories: string) {
+    const course = await this.courseRepo.findBy({
+      categories: categories,
+      state: 'publicado',
+    });
+    if (!course) {
+      throw new NotFoundException(`Course with id #${categories} not found`);
+    }
+    return course;
+  }
+
+  async getCoursebykeyword(keywords: string) {
+    const course = await this.courseRepo.findBy({
+      keywords: keywords,
+      state: 'publicado',
+    });
+    if (!course) {
+      throw new NotFoundException(`Course with id #${keywords} not found`);
+    }
+    return course;
+  }
+
   createCourse(data: CreateCourseDto) {
     const newCourse = this.courseRepo.create(data);
     return this.courseRepo.save(newCourse);
@@ -33,19 +55,6 @@ export class CoursesService {
     const course = await this.courseRepo.findOneBy({ id: id });
     this.courseRepo.merge(course, changes);
     return this.courseRepo.save(course);
-  }
-  ChangeState(id: number, changes: StateCourse): Course {
-    const courseToUpdate = this.getCourse(id);
-    if (!courseToUpdate) {
-      throw new NotFoundException(`Course with id #${id} not found`);
-    } else {
-      const index = this.courses.findIndex((item) => item.id === id);
-      this.courses[index] = {
-        ...courseToUpdate,
-        ...changes,
-      };
-      return this.courses[index];
-    }
   }
 
   deleteCourse(id: number) {
