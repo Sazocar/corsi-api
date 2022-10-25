@@ -5,6 +5,7 @@ import { RegisterAuthDto } from '../dto/register-auth.dto';
 import { hash, compare } from 'bcrypt';
 import { LoginAuthDto } from '../dto/login-auth.dto';
 import { User } from '../entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 
 
@@ -12,6 +13,7 @@ import { User } from '../entities/user.entity';
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepo: Repository<User>,
+    private jwtService: JwtService
   ) {}
 
   async register(userObject: RegisterAuthDto) {
@@ -38,7 +40,16 @@ export class AuthService {
       throw new HttpException('PASSWORD_INCORRECT', HttpStatus.FORBIDDEN)
     }
 
-    const data = findUser;
+    const payload = {
+      id: findUser.id,
+      name: findUser.name
+    }
+    const token = this.jwtService.sign(payload);
+
+    const data = {
+      user: findUser,
+      token, 
+    }
 
     return data;
   }
