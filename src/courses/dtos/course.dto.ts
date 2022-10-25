@@ -15,12 +15,11 @@ export class CreateCourseDto {
   readonly description: string;
 
   @ApiProperty()
-  readonly lessons: Lesson[];
+  readonly categories: string;
 
-  @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  readonly categories: string;
+  readonly lessons: Lesson[];
 
   @IsString()
   @IsNotEmpty()

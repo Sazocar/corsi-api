@@ -2,30 +2,36 @@
 import { Student } from 'src/person/entities/student';
 import { PersonService } from 'src/person/person.services/person.services.service';
 import { Person } from 'src/person/entities/person';
+import { SuscribeService } from 'src/suscribe/service/service.service';
 export interface StateCourse {
-  suscribe(student: Student, course: Course);
+  Suscribe(idperson: number, idcourse: number): string;
 }
 
 export class Published implements StateCourse {
-  constructor(private service: PersonService) {}
-  suscribe(student: Student, course: Course) {
-    this.service.suscribeService(student, course);
+  constructor(private service: SuscribeService) {}
+  state = 'Published';
+  Suscribe(idperson: number, idcourse: number) {
+    this.service.suscribe(idperson, idcourse);
+    return 'curso suscrito exitosamente';
   }
 }
 
 export class Created implements StateCourse {
-  suscribe(student: Student, course: Course) {
+  state = 'Created';
+  Suscribe(idperson: number, idcourse: number) {
     return 'no se puede suscribir';
   }
 }
 
 export class Deleted implements StateCourse {
-  suscribe(student: Student) {
+  state = 'Deleted';
+  Suscribe(idperson: number, idcourse: number) {
     return 'no se puede suscribir';
   }
 }
 export class Suspended implements StateCourse {
-  suscribe(student: Student) {
+  state = 'Suspended';
+  Suscribe(idperson: number, idcourse: number) {
     return 'no se puede suscribir';
   }
 }
