@@ -7,7 +7,6 @@ import {
   Post,
   Put,
   Delete,
-  Query,
 } from '@nestjs/common';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
@@ -30,7 +29,6 @@ export class CoursesController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.getCourse(id);
   }
-
   @Get('/categories/:category')
   findcategory(@Param('category') category: string) {
     return this.coursesServices.getCoursebycategory(category);
@@ -39,7 +37,6 @@ export class CoursesController {
   findkeyword(@Param('keyword') keyword: string) {
     return this.coursesServices.getCoursebykeyword(keyword);
   }
-
   @Post()
   createCourse(@Body() payload: CreateCourseDto) {
     return this.coursesServices.createCourse(payload);
@@ -53,7 +50,7 @@ export class CoursesController {
     return this.coursesServices.updateCourse(id, payload);
   }
 
-  /*@Put(':id/changestate/deleted')
+  /* @Put(':id/changestate/deleted')
   changestated(@Param('id', ParseIntPipe) id: number): Course {
     const Aux = new Deleted();
     return this.coursesServices.ChangeState(id, Aux);
@@ -69,8 +66,8 @@ export class CoursesController {
   changestates(@Param('id', ParseIntPipe) id: number): Course {
     const Aux = new Suspended();
     return this.coursesServices.ChangeState(id, Aux);
-  }*/
-
+  }
+*/
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.deleteCourse(id);
