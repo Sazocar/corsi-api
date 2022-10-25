@@ -20,7 +20,7 @@ export class PersonController {
   getAll() {
     return this.service.getAll();
   }
-  @Get('id')
+  @Get()
   findOne(@Param('id', ParseIntPipe) id: number): Person {
     return this.service.getPerson(id);
   }
