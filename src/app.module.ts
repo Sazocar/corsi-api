@@ -8,8 +8,8 @@ import { LessonModule } from './Lesson/lesson.module';
 //import { MensajeModule } from './mensaje/mensaje.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
-import { SmsService } from './mensaje/mensaje.service';
-import { SmsController } from './mensaje/mensaje.controller';
+import { SmsService } from './sms/service/sms.service';
+import { SmsController } from './sms/controller/sms.controller';
 
 @Module({
   imports: [
@@ -18,9 +18,9 @@ import { SmsController } from './mensaje/mensaje.controller';
     //MensajeModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
-        TWILIO_ACCOUNT_SID: 'AC5273987fc445241a3e7fb48dcc8b2706',
-        TWILIO_AUTH_TOKEN: 'a6c73bf5f24d0fc71859b282b9135628',
-        TWILIO_VERIFICATION_SERVICE_SID: '+13865304793',
+        TWILIO_ACCOUNT_SID: Joi.string().required(),
+        TWILIO_AUTH_TOKEN: Joi.string().required(),
+        TWILIO_VERIFICATION_SERVICE_SID: Joi.string().required(),
       }),
     }),
   ],

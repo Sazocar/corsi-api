@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SmsService } from 'src/mensaje/mensaje.service';
+import { SmsService } from 'src/sms/service/sms.service';
 import { Student } from 'src/person/entities/student';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';

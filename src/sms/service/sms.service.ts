@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Twilio } from 'twilio';
 //import { PersonService } from '../person/person.services/person.services.service';
 
@@ -6,9 +7,9 @@ import { Twilio } from 'twilio';
 export class SmsService {
   private twilioClient: Twilio;
 
-  constructor() {
-    const accountSid = 'AC5273987fc445241a3e7fb48dcc8b2706';
-    const authToken = 'a6c73bf5f24d0fc71859b282b9135628';
+  constructor(private readonly configService: ConfigService) {
+    const accountSid = configService.get('TWILIO_ACCOUNT_SID');
+    const authToken = configService.get('TWILIO_AUTH_TOKEN');
 
     this.twilioClient = new Twilio(accountSid, authToken);
   }

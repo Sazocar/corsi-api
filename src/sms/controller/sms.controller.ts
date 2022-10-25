@@ -2,7 +2,7 @@
 import {
     Controller, Post, 
   } from '@nestjs/common';
-  import {SmsService} from './mensaje.service';
+  import {SmsService } from '../service/sms.service';
   
   //import JwtAuthenticationGuard from '../authentication/jwt-authentication.guard';
   //import RequestWithUser from '../authentication/requestWithUser.interface';
