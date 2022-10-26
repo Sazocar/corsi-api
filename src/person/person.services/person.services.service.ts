@@ -5,12 +5,13 @@ import { Person } from '../entities/person';
 import { Student } from '../entities/student';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common/exceptions';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 @Injectable()
 export class PersonService {
   constructor(
     @InjectRepository(Person) private personRepo: Repository<Person>,
+    @InjectRepository(Course) private courseRepo: Repository<Course>,
   ) {}
 
   /* suscribeService(student: Student, course: Course) {
@@ -18,9 +19,15 @@ export class PersonService {
     course.students.push(student);
   }*/
 
-  createPerson(data: CreatePersonDto) {
-    const newperson = this.personRepo.create(data);
-    return this.personRepo.save(newperson);
+  async createPerson(data: CreatePersonDto) {
+    const newPerson = this.personRepo.create(data);
+    if (data.coursesId) {
+      const courses = await this.courseRepo.findBy({
+        id: In(data.coursesId),
+      });
+      newPerson.courses = courses;
+    }
+    return this.personRepo.save(newPerson);
   }
 
   async getPerson(id: number) {
@@ -31,7 +38,9 @@ export class PersonService {
     return person;
   }
   getAll() {
-    return this.personRepo.find();
+    return this.personRepo.find({
+      relations: ['courses'],
+    });
   }
 
   deletPerson(id: number) {

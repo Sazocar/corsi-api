@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -14,6 +15,7 @@ export class Person {
   id: number;
 
   @ManyToMany(() => Course, (course) => course.students)
+  @JoinTable()
   courses?: Course[];
 
   @Column()
