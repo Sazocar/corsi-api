@@ -17,7 +17,11 @@ export class AuthService {
   ) {}
 
   async register(userObject: RegisterAuthDto) {
-    const { password } = userObject;
+    const { password, email } = userObject;
+    const findUser = await this.userRepo.findOneBy({ email });
+    if (findUser) {
+      throw new HttpException('USER_ALREADY_EXISTS', HttpStatus.INTERNAL_SERVER_ERROR)
+    }
     const plainToHash = await hash(password, 10);
     userObject = {
       ...userObject,
