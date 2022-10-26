@@ -24,6 +24,28 @@ export class CoursesService {
     return course;
   }
 
+  async getCoursebycategory(categories: string) {
+    const course = await this.courseRepo.findBy({
+      categories: categories,
+      state: 'publicado',
+    });
+    if (!course) {
+      throw new NotFoundException(`Course with id #${categories} not found`);
+    }
+    return course;
+  }
+
+  async getCoursebykeyword(keywords: string) {
+    const course = await this.courseRepo.findBy({
+      keywords: keywords,
+      state: 'publicado',
+    });
+    if (!course) {
+      throw new NotFoundException(`Course with id #${keywords} not found`);
+    }
+    return course;
+  }
+
   createCourse(data: CreateCourseDto) {
     const newCourse = this.courseRepo.create(data);
     return this.courseRepo.save(newCourse);

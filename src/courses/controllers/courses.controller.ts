@@ -14,13 +14,17 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
+import { SuscribeService } from 'src/suscribe/service/service.service';
 
 @ApiBearerAuth()
 @ApiTags('Courses')
 @UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
-  constructor(private coursesServices: CoursesService) {}
+  constructor(
+    private coursesServices: CoursesService,
+    private suscribeservice: SuscribeService,
+  ) {}
 
   @Get()
   findCourses() {
@@ -31,7 +35,14 @@ export class CoursesController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.getCourse(id);
   }
-
+  @Get('/categories/:category')
+  findcategory(@Param('category') category: string) {
+    return this.coursesServices.getCoursebycategory(category);
+  }
+  @Get('/keyword/:keyword')
+  findkeyword(@Param('keyword') keyword: string) {
+    return this.coursesServices.getCoursebykeyword(keyword);
+  }
   @Post()
   createCourse(@Body() payload: CreateCourseDto) {
     return this.coursesServices.createCourse(payload);
@@ -45,6 +56,24 @@ export class CoursesController {
     return this.coursesServices.updateCourse(id, payload);
   }
 
+  /* @Put(':id/changestate/deleted')
+  changestated(@Param('id', ParseIntPipe) id: number): Course {
+    const Aux = new Deleted();
+    return this.coursesServices.ChangeState(id, Aux);
+  }
+
+  @Put(':id/changestate/published')
+  changestatep(@Param('id', ParseIntPipe) id: number): Course {
+    const Aux = new Published(this.suscribeservice);
+    return this.coursesServices.ChangeState(id, Aux);
+  }
+
+  @Put(':id/changestate/suspended')
+  changestates(@Param('id', ParseIntPipe) id: number): Course {
+    const Aux = new Suspended();
+    return this.coursesServices.ChangeState(id, Aux);
+  }
+*/
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.deleteCourse(id);
