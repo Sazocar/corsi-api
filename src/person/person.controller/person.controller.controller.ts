@@ -18,7 +18,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 
 @ApiBearerAuth()
-@ApiTags('person')
+@ApiTags('Person')
 @Controller('person')
 export class PersonController {
   constructor(private service: PersonService) {}
@@ -29,6 +29,7 @@ export class PersonController {
     return this.service.getAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.getPerson(id);

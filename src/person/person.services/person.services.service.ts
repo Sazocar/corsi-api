@@ -17,12 +17,10 @@ export class PersonService {
     student.courses.push(course);
     course.students.push(student);
   }*/
-
-  createPerson(data: CreatePersonDto) {
-    const newperson = this.personRepo.create(data);
-    return this.personRepo.save(newperson);
+  getAll() {
+    return this.personRepo.find();
   }
-
+  
   async getPerson(id: number) {
     const person = await this.personRepo.findOneBy({ id: id });
     if (!person) {
@@ -30,8 +28,10 @@ export class PersonService {
     }
     return person;
   }
-  getAll() {
-    return this.personRepo.find();
+
+  createPerson(data: CreatePersonDto) {
+    const newperson = this.personRepo.create(data);
+    return this.personRepo.save(newperson);
   }
 
   deletPerson(id: number) {

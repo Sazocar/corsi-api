@@ -5,10 +5,12 @@ import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
 export class CreateLessonDto {
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly title: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly description: string;
 
   @IsPositive()
