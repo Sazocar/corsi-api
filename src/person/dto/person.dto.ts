@@ -40,7 +40,3 @@ export class CreatePersonDto {
 }
 
 export class UpdatePersonDto extends PartialType(CreatePersonDto) {}
-
-export class UpdatePersonSuscriptionDto extends PickType(CreatePersonDto, [
-  'coursesId',
-]) {}

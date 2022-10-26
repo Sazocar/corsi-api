@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Course } from 'src/courses/entities/course';
-import {
-  CreatePersonDto,
-  UpdatePersonDto,
-  UpdatePersonSuscriptionDto,
-} from '../dto/person.dto';
+import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { Person } from '../entities/person';
 import { Student } from '../entities/student';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NotFoundException } from '@nestjs/common/exceptions';
+import {
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common/exceptions';
 import { In, Repository } from 'typeorm';
 
 @Injectable()
@@ -60,6 +59,35 @@ export class PersonService {
       person.courses = courses;
     }
     this.personRepo.merge(person, changes);
+    return this.personRepo.save(person);
+  }
+
+  async removeCourseByPerson(personId: number, courseId: number) {
+    const person = await this.personRepo.findOne({
+      where: { id: personId },
+      relations: ['courses'],
+    });
+    person.courses = person.courses.filter((item) => item.id !== courseId);
+    return this.personRepo.save(person);
+  }
+
+  async suscribe(personId: number, courseId: number) {
+    const person = await this.personRepo.findOne({
+      where: { id: personId },
+      relations: ['courses'],
+    });
+    if (!person.isActive) {
+      throw new ConflictException(`Person ${person.name} is not active`);
+    }
+    const course = await this.courseRepo.findOneBy({ id: courseId });
+    if (!course) {
+      throw new NotFoundException(`Course #${courseId} not found`);
+    }
+    if (!person.courses.find((item) => item.id == courseId)) {
+      person.courses.push(course);
+    } else {
+      throw new ConflictException(`Course: ${courseId} already exists`);
+    }
     return this.personRepo.save(person);
   }
 }

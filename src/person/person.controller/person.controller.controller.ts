@@ -11,11 +11,7 @@ import { get } from 'http';
 import { Person } from '../entities/person';
 import { PersonService } from '../person.services/person.services.service';
 import { ParseIntPipe } from '@nestjs/common/pipes';
-import {
-  CreatePersonDto,
-  UpdatePersonDto,
-  UpdatePersonSuscriptionDto,
-} from '../dto/person.dto';
+import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 
 @Controller('person')
 export class PersonController {
@@ -41,16 +37,24 @@ export class PersonController {
     return this.service.updatePerson(id, payload);
   }
 
+  @Put(':id/course/:courseId')
+  suscribe(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('courseId', ParseIntPipe) courseId: number,
+  ) {
+    return this.service.suscribe(id, courseId);
+  }
+
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.service.deletPerson(id);
   }
 
-  /*@Put('suscribe/:id')
-  suscribir(
+  @Delete(':id/course/:courseId')
+  deleteCourse(
     @Param('id', ParseIntPipe) id: number,
-    @Body() payload: UpdatePersonSuscriptionDto,
+    @Param('courseId', ParseIntPipe) courseId: number,
   ) {
-    return this.service.suscribe(id, payload);
-  }*/
+    return this.service.removeCourseByPerson(id, courseId);
+  }
 }
