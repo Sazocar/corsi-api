@@ -1,19 +1,18 @@
-import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable } from '@nestjs/common';
-
-@Injectable()
+/* eslint-disable prettier/prettier */
+import nodemailer = require('nodemailer');
 export class MailService {
-  constructor(private mailerService: MailerService) {}
-
-  async sendMail(email: string, name: string) {
-    console.log(email);
-    await this.mailerService.sendMail({
-      to: email,
-      subject: 'Greeting from NestJS NodeMailer',
-      template: '/email',
-      context: {
-        name: name,
-      },
-    });
-  }
+    
+    sendEmail(){
+    return nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: 'ravenscorsi@gmail.com', // generated ethereal user
+          pass: 'qbckgpouncqwbklm', // generated ethereal password
+        },
+      });
+    }
+     
+    
 }
