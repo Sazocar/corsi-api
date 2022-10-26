@@ -30,6 +30,7 @@ export class CreatePersonDto {
   readonly email: string;
 
   @IsNotEmpty()
+  @IsPhoneNumber()
   @ApiProperty()
   readonly phone: number;
 }
