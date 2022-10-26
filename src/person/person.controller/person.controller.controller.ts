@@ -11,7 +11,11 @@ import { get } from 'http';
 import { Person } from '../entities/person';
 import { PersonService } from '../person.services/person.services.service';
 import { ParseIntPipe } from '@nestjs/common/pipes';
-import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
+import {
+  CreatePersonDto,
+  UpdatePersonDto,
+  UpdatePersonSuscriptionDto,
+} from '../dto/person.dto';
 
 @Controller('person')
 export class PersonController {
@@ -42,11 +46,11 @@ export class PersonController {
     return this.service.deletPerson(id);
   }
 
-  @Put('suscribe/:id')
+  /*@Put('suscribe/:id')
   suscribir(
     @Param('id', ParseIntPipe) id: number,
-    @Body() payload: UpdatePersonDto,
+    @Body() payload: UpdatePersonSuscriptionDto,
   ) {
-    return this.service.suscribe(id, payload.coursesId);
-  }
+    return this.service.suscribe(id, payload);
+  }*/
 }

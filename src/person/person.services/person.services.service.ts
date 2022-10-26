@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Course } from 'src/courses/entities/course';
-import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
+import {
+  CreatePersonDto,
+  UpdatePersonDto,
+  UpdatePersonSuscriptionDto,
+} from '../dto/person.dto';
 import { Person } from '../entities/person';
 import { Student } from '../entities/student';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -56,19 +60,6 @@ export class PersonService {
       person.courses = courses;
     }
     this.personRepo.merge(person, changes);
-    return this.personRepo.save(person);
-  }
-
-  async suscribe(idPerson: number, idCourse: number[]) {
-    const person = await this.personRepo.findOneBy({ id: idPerson });
-
-    if (idCourse) {
-      const courses = await this.courseRepo.findBy({
-        id: In(idCourse),
-      });
-      person.courses = courses;
-    }
-
     return this.personRepo.save(person);
   }
 }

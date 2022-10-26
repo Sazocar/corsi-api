@@ -1,4 +1,4 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
@@ -40,3 +40,7 @@ export class CreatePersonDto {
 }
 
 export class UpdatePersonDto extends PartialType(CreatePersonDto) {}
+
+export class UpdatePersonSuscriptionDto extends PickType(CreatePersonDto, [
+  'coursesId',
+]) {}
