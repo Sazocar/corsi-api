@@ -1,10 +1,11 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
   IsBoolean,
   IsEmail,
   IsPhoneNumber,
+  IsArray,
 } from 'class-validator';
 import { Course } from 'src/courses/entities/course';
 export class CreatePersonDto {
@@ -33,6 +34,10 @@ export class CreatePersonDto {
   @IsPhoneNumber()
   @ApiProperty()
   readonly phone: number;
+
+  @IsArray()
+  @ApiProperty()
+  readonly coursesId: number[];
 }
 
 export class UpdatePersonDto extends PartialType(CreatePersonDto) {}

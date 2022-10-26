@@ -48,8 +48,24 @@ export class PersonController {
     return this.service.updatePerson(id, payload);
   }
 
+  @Put(':id/course/:courseId')
+  suscribe(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('courseId', ParseIntPipe) courseId: number,
+  ) {
+    return this.service.suscribe(id, courseId);
+  }
+
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.service.deletPerson(id);
+  }
+
+  @Delete(':id/course/:courseId')
+  deleteCourse(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('courseId', ParseIntPipe) courseId: number,
+  ) {
+    return this.service.removeCourseByPerson(id, courseId);
   }
 }
