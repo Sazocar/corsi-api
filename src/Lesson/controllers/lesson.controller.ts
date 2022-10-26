@@ -1,9 +1,15 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { Body, Delete, Post, Put } from '@nestjs/common/decorators';
+import { Body, Delete, Post, Put, UseGuards } from '@nestjs/common/decorators';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
+
+@ApiBearerAuth()
+@ApiTags('Lessons')
+@UseGuards(JwtAuthGuard)
 @Controller('lessons')
 export class LessonController {
   constructor(private lessonService: LessonService) {}
