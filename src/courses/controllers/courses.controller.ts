@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -50,12 +51,14 @@ export class CoursesController {
     return this.coursesServices.updateCourse(id, payload);
   }
 
-  /* @Put(':id/changestate/deleted')
-  changestated(@Param('id', ParseIntPipe) id: number): Course {
-    const Aux = new Deleted();
-    return this.coursesServices.ChangeState(id, Aux);
+  @Put(':id/changestate')
+  changestated(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateCourseDto,
+  ) {
+    return this.coursesServices.ChangeState(id, payload);
   }
-
+  /*
   @Put(':id/changestate/published')
   changestatep(@Param('id', ParseIntPipe) id: number): Course {
     const Aux = new Published(this.suscribeservice);

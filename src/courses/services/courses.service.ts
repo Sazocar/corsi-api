@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm/dist';
 import { Repository } from 'typeorm';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
+import nodemailer = require('nodemailer');
 
 @Injectable()
 export class CoursesService {
@@ -59,5 +60,39 @@ export class CoursesService {
 
   deleteCourse(id: number) {
     return this.courseRepo.delete(id);
+  }
+
+  async ChangeState(id: number, change: UpdateCourseDto) {
+    const course = await this.courseRepo.findOneBy({ id: id });
+    const { state } = change;
+    for (const user of course.students) {
+      this.sendEmail(
+        user.email,
+        `Se ha alterado el estado del curso ${course.title}, a ${state}`,
+      );
+    }
+    if (course.state != state) {
+      this.courseRepo.merge(course, change);
+      return this.courseRepo.save(course);
+    }
+  }
+
+  sendEmail(email: string, message: string) {
+    return nodemailer
+      .createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: 'ravenscorsi@gmail.com', // generated ethereal user
+          pass: 'qbckgpouncqwbklm', // generated ethereal password
+        },
+      })
+      .sendMail({
+        from: 'ravenscorsi@gmail.com', // sender address
+        to: email, // list of receivers
+        subject: 'Cambio del estado del curso', // Subject line
+        html: message,
+      });
   }
 }
