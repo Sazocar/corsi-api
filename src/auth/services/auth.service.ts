@@ -8,7 +8,6 @@ import { User } from '../entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 
 
-
 @Injectable()
 export class AuthService {
   constructor(
