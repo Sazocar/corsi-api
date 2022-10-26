@@ -19,7 +19,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('Courses')
     .addTag('Lessons')
-    .addTag('Person')
+    .addTag('Persons')
     .addTag('Auth')
     .build();
   const document = SwaggerModule.createDocument(app, config);
