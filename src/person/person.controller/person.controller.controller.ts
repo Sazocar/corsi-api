@@ -18,7 +18,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 
 @ApiBearerAuth()
-@ApiTags('Person')
+@ApiTags('Persons')
 @Controller('person')
 export class PersonController {
   constructor(private service: PersonService) {}
