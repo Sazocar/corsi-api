@@ -41,4 +41,12 @@ export class PersonController {
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.service.deletPerson(id);
   }
+
+  @Put('suscribe/:id')
+  suscribir(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdatePersonDto,
+  ) {
+    return this.service.suscribe(id, payload.coursesId);
+  }
 }

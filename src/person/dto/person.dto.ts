@@ -35,7 +35,6 @@ export class CreatePersonDto {
   readonly phone: number;
 
   @IsArray()
-  @IsNotEmpty()
   @ApiProperty()
   readonly coursesId: number[];
 }

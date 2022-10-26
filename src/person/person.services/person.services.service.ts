@@ -46,9 +46,29 @@ export class PersonService {
   deletPerson(id: number) {
     return this.personRepo.delete(id);
   }
+
   async updatePerson(id: number, changes: UpdatePersonDto) {
     const person = await this.personRepo.findOneBy({ id: id });
+    if (changes.coursesId) {
+      const courses = await this.courseRepo.findBy({
+        id: In(changes.coursesId),
+      });
+      person.courses = courses;
+    }
     this.personRepo.merge(person, changes);
+    return this.personRepo.save(person);
+  }
+
+  async suscribe(idPerson: number, idCourse: number[]) {
+    const person = await this.personRepo.findOneBy({ id: idPerson });
+
+    if (idCourse) {
+      const courses = await this.courseRepo.findBy({
+        id: In(idCourse),
+      });
+      person.courses = courses;
+    }
+
     return this.personRepo.save(person);
   }
 }
