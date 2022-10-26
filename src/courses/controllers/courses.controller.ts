@@ -7,11 +7,17 @@ import {
   Post,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
 
+@ApiBearerAuth()
+@ApiTags('Courses')
+@UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
   constructor(private coursesServices: CoursesService) {}
