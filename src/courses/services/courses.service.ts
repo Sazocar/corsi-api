@@ -34,7 +34,7 @@ export class CoursesService {
       state: 'publicado',
     });
     if (!course) {
-      throw new NotFoundException(`Course with id #${categories} not found`);
+      throw new NotFoundException(`Courses not found`);
     }
     return course;
   }
@@ -45,7 +45,7 @@ export class CoursesService {
       state: 'publicado',
     });
     if (!course) {
-      throw new NotFoundException(`Course with id #${keywords} not found`);
+      throw new NotFoundException(`Courses not found`);
     }
     return course;
   }
@@ -57,8 +57,12 @@ export class CoursesService {
 
   async updateCourse(id: number, changes: UpdateCourseDto) {
     const course = await this.courseRepo.findOneBy({ id: id });
-    this.courseRepo.merge(course, changes);
-    return this.courseRepo.save(course);
+    if (!course) {
+      throw new NotFoundException(`Course with id #${id} not found`);
+    } else {
+      this.courseRepo.merge(course, changes);
+      return this.courseRepo.save(course);
+    }
   }
 
   deleteCourse(id: number) {
