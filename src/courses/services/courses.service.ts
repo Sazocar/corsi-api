@@ -61,7 +61,11 @@ export class CoursesService {
     return this.courseRepo.save(course);
   }
 
-  deleteCourse(id: number) {
+  async deleteCourse(id: number) {
+    const course = await this.courseRepo.findOneBy({ id: id });
+    if (!course) {
+      throw new NotFoundException(`Course with id #${id} not found`);
+    }
     return this.courseRepo.delete(id);
   }
 
