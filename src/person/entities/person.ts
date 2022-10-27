@@ -36,8 +36,8 @@ export class Person {
   @Column()
   isActive: boolean;
 
-  //@Column()
-  //student: Student;
+  @Column()
+  student: Student;
 
   @CreateDateColumn({
     type: 'timestamptz',
