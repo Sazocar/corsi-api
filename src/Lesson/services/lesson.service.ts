@@ -7,9 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm/dist';
 import { CoursesService } from 'src/courses/services/courses.service';
 import { Repository } from 'typeorm';
-import { CreateCommentsDto } from '../Dto/comments.dto';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
-import { Comments } from '../Entities/Comments';
 import { Lesson } from '../Entities/Lesson';
 
 @Injectable()
@@ -54,8 +52,9 @@ export class LessonService {
     return lesson;
   }
 
-  async commentLesson(lessonId: number, payload: CreateCommentsDto) {
+  async commentLesson(lessonId: number, payload: string) {
     const lesson = await this.findOne(lessonId);
+    lesson.comments.push(payload);
     return this.lessonRepo.save(lesson);
   }
 }

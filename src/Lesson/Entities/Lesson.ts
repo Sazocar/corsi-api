@@ -1,11 +1,9 @@
 import { Course } from 'src/courses/entities/course';
-import { Comments } from './Comments';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -21,8 +19,8 @@ export class Lesson {
   @Column({ type: 'text' })
   description: string;
 
-  @OneToMany(() => Comments, (comments) => comments.commentId)
-  comments: Comments[];
+  @Column('text', { array: true })
+  comments: string[];
 
   @CreateDateColumn({
     type: 'timestamptz',

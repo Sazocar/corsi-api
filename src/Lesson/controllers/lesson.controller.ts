@@ -41,12 +41,12 @@ export class LessonController {
     return this.lessonService.remove(lessonId);
   }
 
- /* @Put(':lessonId/person/:personId')
+  @Put(':lessonId/person/:personId')
   async comment(
     @Param('lessonId', ParseIntPipe) lessonId: number,
     @Param('personId', ParseIntPipe) personId: number,
     @Body() payload: string,
   ) {
     return this.lessonService.commentLesson(lessonId, payload);
-  }*/
+  }
 }

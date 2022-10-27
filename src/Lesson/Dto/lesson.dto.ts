@@ -1,6 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
-import { Comments } from '../Entities/Comments';
 
 export class CreateLessonDto {
   @IsString()
@@ -18,9 +17,10 @@ export class CreateLessonDto {
   @ApiProperty()
   readonly courseId: number;
 
+  @IsString({ each: true })
   @IsNotEmpty()
   @ApiProperty()
-  readonly comments: Comments[];
+  readonly comments: string[];
 }
 
 export class UpdateLessonDto extends PartialType(CreateLessonDto) {}
