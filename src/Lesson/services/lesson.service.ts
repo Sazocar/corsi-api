@@ -37,11 +37,12 @@ export class LessonService {
   }
 
   async remove(id: number) {
-    const course = await this.courseRepo.findOneBy({ id: id });
-    if (!course) {
-      throw new NotFoundException(`Course with id #${id} not found`);
+    const lesson = await this.lessonRepo.findOneBy({ id: id });
+    if (!lesson) {
+      throw new NotFoundException(`Lesson with id #${id} not found`);
     }
-    return this.lessonRepo.delete(id);
+    this.lessonRepo.delete(id);
+    return lesson;
   }
 
   findAll() {

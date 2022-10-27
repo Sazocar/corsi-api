@@ -6,7 +6,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
-
 @ApiBearerAuth()
 @ApiTags('Lessons')
 @UseGuards(JwtAuthGuard)
