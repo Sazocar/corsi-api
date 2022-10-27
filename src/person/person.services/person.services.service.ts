@@ -32,7 +32,7 @@ export class PersonService {
     }
     return this.personRepo.save(newPerson);
   }
-  
+
   async getPerson(id: number) {
     const person = await this.personRepo.findOneBy({ id: id });
     if (!person) {
