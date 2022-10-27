@@ -59,10 +59,9 @@ export class CoursesService {
     const course = await this.courseRepo.findOneBy({ id: id });
     if (!course) {
       throw new NotFoundException(`Course with id #${id} not found`);
-    } else {
-      this.courseRepo.merge(course, changes);
-      return this.courseRepo.save(course);
     }
+    this.courseRepo.merge(course, changes);
+    return this.courseRepo.save(course);
   }
 
   deleteCourse(id: number) {
