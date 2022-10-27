@@ -10,12 +10,11 @@ import {
 } from '@nestjs/common';
 import { get } from 'http';
 import { Person } from '../entities/person';
-import { PersonService } from '../person.services/person.services.service';
+import { PersonService } from '../services/person.service';
 import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-
 
 @ApiBearerAuth()
 @ApiTags('Persons')

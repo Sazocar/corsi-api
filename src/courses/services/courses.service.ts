@@ -66,14 +66,19 @@ export class CoursesService {
   }
 
   async ChangeState(id: number, change: UpdateCourseDto) {
-    const course = await this.courseRepo.findOneBy({ id: id });
+    const course = await this.courseRepo.findOne({
+      where: { id: id },
+      relations: ['students'],
+    });
+    console.log(course);
     const { state } = change;
-    for (const user of course.students) {
+    course.students.forEach((item) =>
       this.sendEmail(
-        user.email,
+        item.email,
         `Se ha alterado el estado del curso ${course.title}, a ${state}`,
-      );
-    }
+      ),
+    );
+
     if (course.state != state) {
       this.courseRepo.merge(course, change);
       return this.courseRepo.save(course);

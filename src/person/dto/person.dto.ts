@@ -6,6 +6,7 @@ import {
   IsEmail,
   IsPhoneNumber,
   IsArray,
+  IsPositive,
 } from 'class-validator';
 import { Course } from 'src/courses/entities/course';
 export class CreatePersonDto {
@@ -31,7 +32,7 @@ export class CreatePersonDto {
   readonly email: string;
 
   @IsNotEmpty()
-  @IsPhoneNumber()
+  @IsPositive()
   @ApiProperty()
   readonly phone: number;
 
