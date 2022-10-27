@@ -30,7 +30,7 @@ export class Person {
   @Column()
   phone: number;
 
-  @Column()
+  @Column({ default: true })
   isActive: boolean;
 
   @CreateDateColumn({

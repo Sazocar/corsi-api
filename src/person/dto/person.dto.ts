@@ -21,8 +21,6 @@ export class CreatePersonDto {
   @ApiProperty()
   readonly lastName: string;
 
-  @IsBoolean()
-  @IsNotEmpty()
   @ApiProperty()
   readonly isActive: boolean;
 
