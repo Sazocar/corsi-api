@@ -1,37 +1,25 @@
-import { Course } from 'src/courses/entities/course';
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Person {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToMany(() => Course, (course) => course.students)
-  @JoinTable()
-  courses?: Course[];
-
   @Column()
   name: string;
-
-  @Column()
-  lastName: string;
 
   @Column({ unique: true })
   email: string;
 
   @Column()
-  phone: number;
-
-  @Column()
-  isActive: boolean;
+  password: string;
 
   @CreateDateColumn({
     type: 'timestamptz',

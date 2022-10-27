@@ -1,14 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
 
 export class CreateLessonDto {
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly title: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   readonly description: string;
 
   @IsPositive()
