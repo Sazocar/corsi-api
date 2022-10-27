@@ -1,5 +1,5 @@
 import { Course } from 'src/courses/entities/course';
-import { Person } from 'src/person/entities/person';
+import { Comments } from './Comments';
 import {
   Column,
   CreateDateColumn,
@@ -21,10 +21,8 @@ export class Lesson {
   @Column({ type: 'text' })
   description: string;
 
-  @Column({ type: 'text' })
-  comments: string[];
-  @OneToMany(() => Person, (person) => person.lesson)
-  person: Person[];
+  @OneToMany(() => Comments, (comments) => comments.commentId)
+  comments: Comments[];
 
   @CreateDateColumn({
     type: 'timestamptz',

@@ -6,7 +6,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
-
 @ApiBearerAuth()
 @ApiTags('Lessons')
 @UseGuards(JwtAuthGuard)
@@ -41,4 +40,13 @@ export class LessonController {
   delete(@Param('lessonId', ParseIntPipe) lessonId: number) {
     return this.lessonService.remove(lessonId);
   }
+
+ /* @Put(':lessonId/person/:personId')
+  async comment(
+    @Param('lessonId', ParseIntPipe) lessonId: number,
+    @Param('personId', ParseIntPipe) personId: number,
+    @Body() payload: string,
+  ) {
+    return this.lessonService.commentLesson(lessonId, payload);
+  }*/
 }

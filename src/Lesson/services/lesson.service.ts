@@ -7,7 +7,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm/dist';
 import { CoursesService } from 'src/courses/services/courses.service';
 import { Repository } from 'typeorm';
+import { CreateCommentsDto } from '../Dto/comments.dto';
 import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
+import { Comments } from '../Entities/Comments';
 import { Lesson } from '../Entities/Lesson';
 
 @Injectable()
@@ -50,5 +52,10 @@ export class LessonService {
       throw new NotFoundException(`Lesson ${id} not found`);
     }
     return lesson;
+  }
+
+  async commentLesson(lessonId: number, payload: CreateCommentsDto) {
+    const lesson = await this.findOne(lessonId);
+    return this.lessonRepo.save(lesson);
   }
 }

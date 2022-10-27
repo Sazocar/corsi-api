@@ -8,8 +8,6 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { get } from 'http';
-import { Person } from '../entities/person';
 import { PersonService } from '../services/person.service';
 import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
@@ -53,16 +51,6 @@ export class PersonController {
     @Param('courseId', ParseIntPipe) courseId: number,
   ) {
     return this.service.suscribe(id, courseId);
-  }
-
-  @Put(':id/course/:courseId/lesson/:lessonId')
-  coment(
-    @Param('id', ParseIntPipe) id: number,
-    @Param('lessonId', ParseIntPipe) lessonId: number,
-    @Param('courseId', ParseIntPipe) courseId: number,
-    @Body() payload: string,
-  ) {
-    return this.service.commentLesson(id, courseId, lessonId, payload);
   }
 
   @Delete(':id')

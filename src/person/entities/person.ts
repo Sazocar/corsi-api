@@ -1,13 +1,10 @@
 import { Course } from 'src/courses/entities/course';
-import { Lesson } from 'src/Lesson/Entities/Lesson';
-import { Student } from './student';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -36,9 +33,6 @@ export class Person {
   @Column()
   isActive: boolean;
 
-  @Column()
-  student: Student;
-
   @CreateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
@@ -50,7 +44,4 @@ export class Person {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
-
-  @ManyToOne(() => Lesson, (lesson) => lesson.person, { onDelete: 'CASCADE' })
-  lesson: Lesson;
 }

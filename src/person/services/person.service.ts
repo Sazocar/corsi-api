@@ -1,23 +1,19 @@
-/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { Course } from 'src/courses/entities/course';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { Person } from '../entities/person';
-//import { Student } from '../entities/student';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   ConflictException,
   NotFoundException,
 } from '@nestjs/common/exceptions';
 import { In, Repository } from 'typeorm';
-import { Lesson } from 'src/Lesson/Entities/Lesson';
 
 @Injectable()
 export class PersonService {
   constructor(
     @InjectRepository(Person) private personRepo: Repository<Person>,
     @InjectRepository(Course) private courseRepo: Repository<Course>,
-    @InjectRepository(Lesson) private lessonRepo: Repository<Lesson>,
   ) {}
 
   /* suscribeService(student: Student, course: Course) {
@@ -92,26 +88,5 @@ export class PersonService {
       throw new ConflictException(`Course: ${courseId} already exists`);
     }
     return this.personRepo.save(person);
-  }
-
-  async commentLesson(personId: number, courseId: number, lessonId: number, comment: string) {
-    const person = await this.personRepo.findOne({
-      where: { id: personId },
-      relations: ['courses'],
-    });
-    if (!person.isActive) {
-      throw new ConflictException(`Person ${person.name} is not active`);
-    }
-    const course = await this.courseRepo.findOneBy({ id: courseId });
-    const lesson = await this.lessonRepo.findOneBy({ id: lessonId });
-    if (!course || !lesson) {
-      throw new NotFoundException(`Course #${courseId} not found`);
-    }
-    if (!person.courses.find((item) => item.id == courseId)) {
-      lesson.comments.push(comment);
-    } else {
-      throw new ConflictException(`Course: ${courseId} already exists`);
-    }
-    return this.lessonRepo.save(lesson);
   }
 }
