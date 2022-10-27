@@ -4,8 +4,8 @@ import { CoursesService } from 'src/courses/services/courses.service';
 import { CoursesController } from 'src/courses/controllers/courses.controller';
 import { Course } from 'src/courses/entities/course';
 import { Person } from './entities/person';
-import { PersonController } from './person.controller/person.controller.controller';
-import { PersonService } from './person.services/person.services.service';
+import { PersonController } from './controller/person.controller';
+import { PersonService } from './services/person.service';
 import { SuscribeService } from 'src/suscribe/service/service.service';
 
 @Module({
