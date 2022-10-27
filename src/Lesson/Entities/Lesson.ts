@@ -1,9 +1,11 @@
 import { Course } from 'src/courses/entities/course';
+import { Person } from 'src/person/entities/person';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -18,6 +20,11 @@ export class Lesson {
 
   @Column({ type: 'text' })
   description: string;
+
+  @Column({ type: 'text' })
+  comments: string[];
+  @OneToMany(() => Person, (person) => person.lesson)
+  person: Person[];
 
   @CreateDateColumn({
     type: 'timestamptz',
