@@ -83,7 +83,7 @@ export class CoursesService {
     course.students.forEach((item) =>
       this.sendEmail(
         item.email,
-        `Se ha alterado el estado del curso ${course.title}, a ${state}`,
+        `Se ha alterado el estado del ${course.title}, de ${course.state} a ${state}`,
       ),
     );
 
