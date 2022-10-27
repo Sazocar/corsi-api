@@ -69,7 +69,8 @@ export class CoursesService {
     if (!course) {
       throw new NotFoundException(`Course with id #${id} not found`);
     }
-    return this.courseRepo.delete(id);
+    this.courseRepo.delete(id);
+    return course;
   }
 
   async ChangeState(id: number, change: UpdateCourseDto) {
