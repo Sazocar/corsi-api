@@ -83,6 +83,9 @@ export class PersonService {
     if (!course) {
       throw new NotFoundException(`Course #${courseId} not found`);
     }
+    if (course.state !== 'Published') {
+      throw new ConflictException(`Course ${course.title} is not published`);
+    }
     if (!person.courses.find((item) => item.id == courseId)) {
       person.courses.push(course);
     } else {

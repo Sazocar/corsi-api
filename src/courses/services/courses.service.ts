@@ -31,7 +31,7 @@ export class CoursesService {
   async getCoursebycategory(categories: string) {
     const course = await this.courseRepo.findBy({
       categories: categories,
-      state: 'publicado',
+      state: 'Published',
     });
     if (!course) {
       throw new NotFoundException(`Courses not found`);
@@ -42,7 +42,7 @@ export class CoursesService {
   async getCoursebykeyword(keywords: string) {
     const course = await this.courseRepo.findBy({
       keywords: keywords,
-      state: 'publicado',
+      state: 'Published',
     });
     if (!course) {
       throw new NotFoundException(`Courses not found`);
