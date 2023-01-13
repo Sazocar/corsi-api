@@ -101,7 +101,7 @@ export class CoursesService {
         secure: true, // true for 465, false for other ports
         auth: {
           user: 'ravenscorsi@gmail.com', // generated ethereal user
-          pass: 'qbckgpouncqwbklm', // generated ethereal password
+          pass: 'qbckgpouncqwbkl', // generated ethereal password
         },
       })
       .sendMail({
