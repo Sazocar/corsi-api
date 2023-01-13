@@ -30,7 +30,7 @@ export class Course {
   @Column()
   keywords: string;
 
-  @Column({ default: 'Created'})
+  @Column({ default: 'Created' })
   state: string;
 
   @ManyToMany(() => Person, (person) => person.courses)
