@@ -1,4 +1,4 @@
-import { Course } from 'src/courses/entities/course';
+import { Course } from '../../course/infrastructure/entities/course';
 import {
   Column,
   CreateDateColumn,

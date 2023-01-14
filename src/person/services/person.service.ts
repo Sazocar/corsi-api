@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Course } from 'src/courses/entities/course';
 import { CreatePersonDto, UpdatePersonDto } from '../dto/person.dto';
 import { Person } from '../entities/person';
 import { Student } from '../entities/student';
@@ -9,6 +8,7 @@ import {
   NotFoundException,
 } from '@nestjs/common/exceptions';
 import { In, Repository } from 'typeorm';
+import { Course } from 'src/course/infrastructure/entities/course';
 
 @Injectable()
 export class PersonService {

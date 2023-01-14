@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 import { Student } from 'src/person/entities/student';
-import { Lesson } from 'src/Lesson/Entities/Lesson';
+import { Lesson } from '../entities/Lesson';
 
 export class CreateCourseDto {
   @IsString()

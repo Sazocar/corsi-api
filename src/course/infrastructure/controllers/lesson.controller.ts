@@ -3,7 +3,7 @@ import { Body, Delete, Post, Put, UseGuards } from '@nestjs/common/decorators';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
+import { CreateLessonDto, UpdateLessonDto } from '../dtos/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
 @ApiBearerAuth()

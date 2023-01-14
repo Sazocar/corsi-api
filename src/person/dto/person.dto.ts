@@ -8,7 +8,7 @@ import {
   IsArray,
   IsPositive,
 } from 'class-validator';
-import { Course } from 'src/courses/entities/course';
+import { Course } from 'src/course/infrastructure/entities/course';
 export class CreatePersonDto {
   readonly courses?: Course[];
   @IsString()
