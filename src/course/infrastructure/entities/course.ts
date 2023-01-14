@@ -1,4 +1,3 @@
-import { Person } from 'src/person/entities/person';
 import {
   Column,
   CreateDateColumn,
@@ -9,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Lesson } from './Lesson';
+import { Person } from 'src/Person/Infrastructure/entities/person';
 
 @Entity()
 export class Course {
