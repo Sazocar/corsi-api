@@ -15,17 +15,13 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
-import { SuscribeService } from 'src/suscribe/service/service.service';
 
 @ApiBearerAuth()
 @ApiTags('Courses')
 @UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
-  constructor(
-    private coursesServices: CoursesService,
-    private suscribeservice: SuscribeService,
-  ) {}
+  constructor(private coursesServices: CoursesService) {}
 
   @Get()
   findCourses() {
