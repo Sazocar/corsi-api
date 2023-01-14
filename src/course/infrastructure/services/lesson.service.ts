@@ -5,10 +5,10 @@ import {
   Inject,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist';
-import { CoursesService } from 'src/courses/services/courses.service';
 import { Repository } from 'typeorm';
-import { CreateLessonDto, UpdateLessonDto } from '../Dto/lesson.dto';
+import { CreateLessonDto, UpdateLessonDto } from '../dtos/lesson.dto';
 import { Lesson } from '../Entities/Lesson';
+import { CoursesService } from './courses.service';
 
 @Injectable()
 export class LessonService {

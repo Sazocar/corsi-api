@@ -1,17 +1,15 @@
-import { Person } from 'src/person/entities/person';
-import { Lesson } from 'src/Lesson/Entities/Lesson';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Course } from './course';
 
 @Entity()
-export class Course {
+export class Lesson {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,21 +18,6 @@ export class Course {
 
   @Column({ type: 'text' })
   description: string;
-
-  @OneToMany(() => Lesson, (lesson) => lesson.course)
-  lessons: Lesson[];
-
-  @Column()
-  categories: string; // Should be an Category[] in the future
-
-  @Column()
-  keywords: string;
-
-  @Column({ default: 'Created' })
-  state: string;
-
-  @ManyToMany(() => Person, (person) => person.courses)
-  students?: Person[];
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -47,4 +30,7 @@ export class Course {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @ManyToOne(() => Course, (course) => course.lessons, { onDelete: 'CASCADE' })
+  course: Course;
 }

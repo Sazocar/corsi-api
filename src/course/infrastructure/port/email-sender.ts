@@ -1,5 +1,5 @@
-import { ISendNotificationStatusChange } from '../aplication/port/Isend-notification-status-change';
 import nodemailer = require('nodemailer');
+import { ISendNotificationStatusChange } from 'src/course/aplication/port/Isend-notification-status-change';
 class EmailSender implements ISendNotificationStatusChange {
   sendEmail(email: string, message: string) {
     return nodemailer
