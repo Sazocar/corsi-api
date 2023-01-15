@@ -38,8 +38,14 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return courses;
   }
 
-  findCoursesByCategory(category: string) {
-    throw new Error('Method not implemented.');
+  async findCoursesByCategory(categories: string) {
+    const course = await this.courseRepo.findBy({
+      categories: categories,
+      state: 'Published',
+    });
+    if (!course) {
+      throw new NotFoundException('Courses not found');
+    }
   }
 
   findCourseByKeywords(keywords: string) {

@@ -4,7 +4,7 @@ export interface ICourseRepository {
   findCourse(courseId: CourseID);
   findCourses();
   findPublishedCourses();
-  findCoursesByCategory(category: string);
+  findCoursesByCategory(categories: string);
   findCourseByKeywords(keywords: string);
   //   updateCourse(course: Course);
   //   deleteCourse(course: Course);
