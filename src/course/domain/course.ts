@@ -1,6 +1,6 @@
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Lesson } from './entities/lesson';
-class Course {
+export class Course {
   private imageCourse: ImageCourse;
   private descriptCourseIDioCourse: DescriptionCourse;
   private courseid: CourseID;
