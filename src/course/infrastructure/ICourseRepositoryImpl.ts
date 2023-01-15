@@ -10,7 +10,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     @InjectRepository(Course) private courseRepo: Repository<Course>,
   ) {}
   findCourses() {
-    throw new Error('Method not implemented.');
+    return this.courseRepo.find({
+      relations: ['lessons'],
+    });
   }
 
   async findCourse(courseId: CourseID) {
