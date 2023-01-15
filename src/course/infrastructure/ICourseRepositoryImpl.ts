@@ -28,12 +28,14 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return course;
   }
 
-  findCourseByCourseId(courseId: CourseID) {
-    throw new Error('Method not implemented.');
-  }
-
-  findPublishedCourses() {
-    throw new Error('Method not implemented.');
+  async findPublishedCourses() {
+    const courses = await this.courseRepo.findBy({
+      state: 'Published',
+    });
+    if (!courses) {
+      throw new NotFoundException(`Courses not found`);
+    }
+    return courses;
   }
 
   findCoursesByCategory(category: string) {
