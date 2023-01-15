@@ -5,4 +5,8 @@ export class CourseID {
   constructor() {
     this.id = randomUUID();
   }
+
+  getId() {
+    return this.id;
+  }
 }

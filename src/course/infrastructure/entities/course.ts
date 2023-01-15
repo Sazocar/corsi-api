@@ -16,6 +16,9 @@ export class Course {
   id: number;
 
   @Column({ type: 'varchar', length: 255 })
+  courseId: string;
+
+  @Column({ type: 'varchar', length: 255 })
   title: string;
 
   @Column({ type: 'text' })
