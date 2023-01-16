@@ -2,8 +2,14 @@ import { randomUUID } from 'crypto';
 
 export class CourseID {
   private id: string;
-  constructor() {
-    this.id = randomUUID();
+
+  constructor();
+  constructor(id?: string) {
+    if (id) {
+      this.id = id;
+    } else {
+      this.id = randomUUID();
+    }
   }
 
   getId() {

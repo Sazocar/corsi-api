@@ -46,6 +46,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (!course) {
       throw new NotFoundException('Courses not found');
     }
+    return course;
   }
 
   async findCourseByKeywords(keywords: string) {
@@ -56,6 +57,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (!course) {
       throw new NotFoundException('Course not found');
     }
+    return course;
   }
 
   //   updateCourse(course: Course) {
