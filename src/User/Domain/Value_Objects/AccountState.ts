@@ -1,4 +1,0 @@
-enum AccountState {
-  ACTIVE,
-  BLOCKED,
-}
