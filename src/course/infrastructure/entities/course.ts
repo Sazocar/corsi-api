@@ -11,7 +11,7 @@ import { Lesson } from './Lesson';
 import { Person } from 'src/Person/Infrastructure/entities/person';
 
 @Entity()
-export class Course {
+export class Coursememento {
   @PrimaryGeneratedColumn()
   id: number;
 
