@@ -1,6 +1,6 @@
-import { PersonBirthDate } from './Value_Objects/PersonBirthDate';
+import { PersonBirthDate } from './Value_Objects/AccountState';
 import { PersonId } from '../../shared/value_objects/PersonId';
-import { PersonLastName } from './Value_Objects/PersonLastName';
+import { PersonLastName } from './Value_Objects/UserEmail';
 import { PersonName } from './Value_Objects/PersonName';
 export abstract class Person {
   private personId: PersonId;
