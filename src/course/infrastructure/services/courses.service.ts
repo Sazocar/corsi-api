@@ -2,13 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist';
 import { Repository } from 'typeorm';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
-import { Course } from '../entities/course';
+import { CourseInfraestructure } from '../entities/course';
 import nodemailer = require('nodemailer');
 
 @Injectable()
 export class CoursesService {
   constructor(
-    @InjectRepository(Course) private courseRepo: Repository<Course>,
+    @InjectRepository(CourseInfraestructure)
+    private courseRepo: Repository<CourseInfraestructure>,
   ) {}
 
   getAllCourses() {

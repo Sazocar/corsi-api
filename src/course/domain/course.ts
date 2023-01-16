@@ -60,4 +60,32 @@ export class Course {
   public getLesson(): Array<Lesson> {
     return this.lessons;
   }
+
+  public setImageCourse(imageCourse: ImageCourse): void {
+    this.imageCourse = imageCourse;
+  }
+
+  public setDescriptionCourse(descriptionCourse: DescriptionCourse): void {
+    this.descriptionCourse = descriptionCourse;
+  }
+
+  public setCourseId(courseId: CourseID) {
+    this.courseid = courseId;
+  }
+
+  public setCourseState(courseState: CourseState) {
+    this.courseState = courseState;
+  }
+
+  public setCourseCategory(courseCategory: Coursecategory) {
+    this.courseCategory = courseCategory;
+  }
+
+  public setKeywords(keywords: Array<Keyword>): void {
+    this.keywords = keywords;
+  }
+
+  public setLessons(lessons: Array<Lesson>): void {
+    this.lessons = lessons;
+  }
 }

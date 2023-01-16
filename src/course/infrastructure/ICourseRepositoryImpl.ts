@@ -1,13 +1,14 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICourseRepository } from '../domain/ICourseRepository';
-import { Course } from './entities/course';
+import { CourseInfraestructure } from './entities/course';
 import { Repository } from 'typeorm';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { Course } from '../domain/course';
 
 export class ICourseRepositoryImpl implements ICourseRepository {
   constructor(
-    @InjectRepository(Course) private courseRepo: Repository<Course>,
+    @InjectRepository(CourseInfraestructure) private courseRepo: Repository<CourseInfraestructure>,
   ) {}
   findCourses() {
     return this.courseRepo.find({
@@ -24,6 +25,8 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       throw new NotFoundException(
         `Course with id #${courseId.getId()} not found`,
       );
+    } else {
+      //var courses = 
     }
     return course;
   }
@@ -67,4 +70,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //   deleteCourse(course: Course) {
   //     throw new Error('Method not implemented.');
   //   }
+
+  private convertCourseDataModelInCourseDomain(courseDataModel: CourseInfraestructure) {
+    var courseDomain = new Course();
+    //courseDomain
+  }
 }
