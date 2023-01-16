@@ -4,6 +4,7 @@ export class CourseID {
   private id: string;
 
   constructor();
+  constructor(id: string);
   constructor(id?: string) {
     if (id) {
       this.id = id;

@@ -4,13 +4,53 @@ import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Course } from './course';
 
 export class CourseMemento implements IMemento {
-  course: Course;
+  private imageCourse: ImageCourse;
+  private descriptionCourse: DescriptionCourse;
+  private courseid: CourseID;
+  private courseState: CourseState;
+  private courseCategory: Coursecategory;
+  private keywords: Array<Keyword>;
+  private lessons: Array<Lesson>;
 
   constructor(course: Course) {
-    this.course = course;
+    this.imageCourse = course.getImageCourse();
+    this.descriptionCourse = course.getDescriptionCourse();
+    this.courseid = course.getCourseId();
+    this.courseState = course.getCourseState();
+    this.courseCategory = course.getCourseCategory();
+    this.keywords = course.getKeywords();
+    this.lessons = course.getLesson();
   }
 
-  getState() {
-    return this.course;
+  getState(): string {
+    return 'hola';
+  }
+
+  public getImageCourse(): ImageCourse {
+    return this.imageCourse;
+  }
+
+  public getDescriptionCourse(): DescriptionCourse {
+    return this.descriptionCourse;
+  }
+
+  public getCourseId(): CourseID {
+    return this.courseid;
+  }
+
+  public getCourseState(): CourseState {
+    return this.courseState;
+  }
+
+  public getCourseCategory(): Coursecategory {
+    return this.courseCategory;
+  }
+
+  public getKeywords(): Array<Keyword> {
+    return this.keywords;
+  }
+
+  public getLesson(): Array<Lesson> {
+    return this.lessons;
   }
 }

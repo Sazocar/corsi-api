@@ -4,15 +4,33 @@ import { IMemento } from 'src/shared/IMemento';
 import { CourseMemento } from './CourseMemento';
 export class Course {
   private imageCourse: ImageCourse;
-  private descriptCourseIDioCourse: DescriptionCourse;
+  private descriptionCourse: DescriptionCourse;
   private courseid: CourseID;
   private courseState: CourseState;
   private courseCategory: Coursecategory;
   private keywords: Array<Keyword>;
   private lessons: Array<Lesson>;
 
+  constructor();
+  constructor(snapshot: CourseMemento);
+  constructor(snapshot?: CourseMemento) {
+    if (snapshot) {
+      this.imageCourse = snapshot.getImageCourse();
+      this.descriptionCourse = snapshot.getDescriptionCourse();
+      this.courseid = snapshot.getCourseId();
+      this.courseState = snapshot.getCourseState();
+      this.courseCategory = snapshot.getCourseCategory();
+      this.keywords = snapshot.getKeywords();
+      this.lessons = snapshot.getLesson();
+    }
+  }
+
   public save(): IMemento {
     return new CourseMemento(this);
+  }
+
+  public createCourseFromMemento(courseMemento: CourseMemento) {
+    return new Course(courseMemento);
   }
 
   public getImageCourse(): ImageCourse {
@@ -20,7 +38,7 @@ export class Course {
   }
 
   public getDescriptionCourse(): DescriptionCourse {
-    return this.descriptCourseIDioCourse;
+    return this.descriptionCourse;
   }
 
   public getCourseId(): CourseID {
