@@ -6,6 +6,8 @@ import { CourseID } from 'src/shared/value_objects/idcourse';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { Course } from '../domain/course';
 import { Lesson } from '../domain/entities/lesson';
+import { LessonInfraestructure } from './entities/Lesson';
+import { LessonId } from '../domain/entities/value_objects/idlesson';
 
 export class ICourseRepositoryImpl implements ICourseRepository {
   constructor(
@@ -89,5 +91,16 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     courseDataModel.lessons.forEach((lesson) =>
       courseDomain.getLesson().push(new Lesson(lesson)),
     );
+  }
+
+  private convertLessonDataModelInLessonDomain(
+    lessonDataModel: LessonInfraestructure,
+  ) {
+    const lessonDomain = new Lesson();
+    lessonDomain.lessonDescription = new DescriptionLesson(
+      lessonDataModel.description,
+    );
+    lessonDomain.videolesson = new Videolesson(lessonDataModel.videoUrl);
+    lessonDomain.lessonid = new LessonId(lessonDataModel.lessonId);
   }
 }

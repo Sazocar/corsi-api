@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Course } from './course';
+import { CourseInfraestructure } from './course';
 
 @Entity()
-export class Lesson {
+export class LessonInfraestructure {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,6 +18,12 @@ export class Lesson {
 
   @Column({ type: 'text' })
   description: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  videoUrl: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  lessonId: string;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -31,6 +37,8 @@ export class Lesson {
   })
   updateAt: Date;
 
-  @ManyToOne(() => Course, (course) => course.lessons, { onDelete: 'CASCADE' })
-  course: Course;
+  @ManyToOne(() => CourseInfraestructure, (course) => course.lessons, {
+    onDelete: 'CASCADE',
+  })
+  course: CourseInfraestructure;
 }
