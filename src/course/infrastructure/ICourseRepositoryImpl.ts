@@ -5,10 +5,12 @@ import { Repository } from 'typeorm';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { Course } from '../domain/course';
+import { Lesson } from '../domain/entities/lesson';
 
 export class ICourseRepositoryImpl implements ICourseRepository {
   constructor(
-    @InjectRepository(CourseInfraestructure) private courseRepo: Repository<CourseInfraestructure>,
+    @InjectRepository(CourseInfraestructure)
+    private courseRepo: Repository<CourseInfraestructure>,
   ) {}
   findCourses() {
     return this.courseRepo.find({
@@ -26,7 +28,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
         `Course with id #${courseId.getId()} not found`,
       );
     } else {
-      //var courses = 
+      //var courses =
     }
     return course;
   }
@@ -71,8 +73,21 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //     throw new Error('Method not implemented.');
   //   }
 
-  private convertCourseDataModelInCourseDomain(courseDataModel: CourseInfraestructure) {
-    var courseDomain = new Course();
-    //courseDomain
+  private convertCourseDataModelInCourseDomain(
+    courseDataModel: CourseInfraestructure,
+  ) {
+    const courseDomain = new Course();
+    courseDomain.setImageCourse(new ImageCourse(courseDataModel.imageUrl));
+    courseDomain.setDescriptionCourse(
+      new DescriptionCourse(courseDataModel.description),
+    );
+    courseDomain.setCourseId(new CourseID(courseDataModel.courseId));
+    // courseDomain.setCourseState();
+    //courseDomain.setCourseCategory();
+    // courseDomain.setKeywords();
+    //Falta metodo para cambiar lessonDataModel a lessonDomain
+    courseDataModel.lessons.forEach((lesson) =>
+      courseDomain.getLesson().push(new Lesson(lesson)),
+    );
   }
 }
