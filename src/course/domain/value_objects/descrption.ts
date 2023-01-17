@@ -1,6 +1,6 @@
 class DescriptionCourse {
   private descriptionCourse: string;
-  DescriptionCourse(description: string) {
+  constructor(description: string) {
     if (description.length <= 250) {
       this.descriptionCourse = description;
     } else {

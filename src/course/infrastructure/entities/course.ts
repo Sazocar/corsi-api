@@ -39,6 +39,9 @@ export class CourseInfraestructure {
   @ManyToMany(() => Person, (person) => person.courses)
   students?: Person[];
 
+  @Column({ type: 'varchar', length: 255 })
+  imageUrl: string;
+
   @CreateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
