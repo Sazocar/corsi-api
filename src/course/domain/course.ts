@@ -92,4 +92,29 @@ export class Course {
   public setLessons(lessons: Array<Lesson>): void {
     this.lessons = lessons;
   }
+
+  static create(
+    imageCourse: ImageCourse,
+    descriptionCourse: DescriptionCourse,
+    courseid: CourseID,
+    courseTitle: CourseTitle,
+    courseSubTitle: CourseSubTitle,
+    courseState: CourseState,
+    courseCategory: Coursecategory,
+    keywords: Array<Keyword>,
+    lessons: Array<Lesson>,
+  ): Course {
+    const courseDomain = new Course();
+    courseDomain.imageCourse = imageCourse;
+    courseDomain.descriptionCourse = descriptionCourse;
+    courseDomain.courseid = courseid;
+    courseDomain.courseTitle = courseTitle;
+    courseDomain.courseSubTitle = courseSubTitle;
+    courseDomain.courseState = courseState;
+    courseDomain.courseCategory = courseCategory;
+    courseDomain.keywords = keywords;
+    courseDomain.lessons = lessons;
+
+    return courseDomain;
+  }
 }
