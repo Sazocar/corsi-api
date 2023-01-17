@@ -22,8 +22,8 @@ export class CourseMemento implements IMemento {
     this.lessons = course.getLesson();
   }
 
-  getState(): string {
-    return 'hola';
+  getState(): IMemento {
+    return this;
   }
 
   public getImageCourse(): ImageCourse {

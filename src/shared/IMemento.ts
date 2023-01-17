@@ -1,3 +1,3 @@
 export interface IMemento {
-  getState();
+  getState(): IMemento;
 }

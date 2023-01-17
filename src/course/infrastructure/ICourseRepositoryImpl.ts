@@ -75,23 +75,12 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //     throw new Error('Method not implemented.');
   //   }
 
-  private convertCourseDataModelInCourseDomain(
+  private convertCourseFromInfraestructureToDomain(
     courseDataModel: CourseInfraestructure,
   ) {
-    const courseDomain = new Course();
-    courseDomain.setImageCourse(new ImageCourse(courseDataModel.imageUrl));
-    courseDomain.setDescriptionCourse(
-      new DescriptionCourse(courseDataModel.description),
-    );
-    courseDomain.setCourseId(new CourseID(courseDataModel.courseId));
-    // courseDomain.setCourseState();
-    //courseDomain.setCourseCategory();
-    // courseDomain.setKeywords();
-    //Falta metodo para cambiar lessonDataModel a lessonDomain
-    courseDataModel.lessons.forEach((lesson) =>
-      courseDomain.getLesson().push(new Lesson(lesson)),
-    );
-    return courseDomain;
+    const courseInfraestructure: CourseInfraestructure =
+      CourseInfraestructure.create(courseDataModel.courseId,);
+    return courseInfraestructure;
   }
 
   private convertLessonDataModelInLessonDomain(

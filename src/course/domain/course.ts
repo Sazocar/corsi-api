@@ -2,10 +2,14 @@ import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Lesson } from './entities/lesson';
 import { IMemento } from 'src/shared/IMemento';
 import { CourseMemento } from './CourseMemento';
+import { CourseTitle } from './entities/value_objects/CourseTitle';
+import { CourseSubTitle } from './entities/value_objects/CourseSubTitle';
 export class Course {
   private imageCourse: ImageCourse;
   private descriptionCourse: DescriptionCourse;
   private courseid: CourseID;
+  private courseTitle: CourseTitle;
+  private courseSubTitle: CourseSubTitle;
   private courseState: CourseState;
   private courseCategory: Coursecategory;
   private keywords: Array<Keyword>;

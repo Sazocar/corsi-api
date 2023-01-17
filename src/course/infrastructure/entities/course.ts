@@ -21,6 +21,9 @@ export class CourseInfraestructure {
   @Column({ type: 'varchar', length: 255 })
   title: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  subTitle: string;
+
   @Column({ type: 'text' })
   description: string;
 
@@ -55,7 +58,6 @@ export class CourseInfraestructure {
   updateAt: Date;
 
   static create(
-    id: number,
     courseId: string,
     title: string,
     description: string,
@@ -67,7 +69,6 @@ export class CourseInfraestructure {
     students?: Person[],
   ): CourseInfraestructure {
     const courseInfraestructure = new CourseInfraestructure();
-    courseInfraestructure.id = id;
     courseInfraestructure.courseId = courseId;
     courseInfraestructure.title = title;
     courseInfraestructure.description = description;
