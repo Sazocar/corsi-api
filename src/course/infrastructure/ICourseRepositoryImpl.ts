@@ -91,6 +91,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     courseDataModel.lessons.forEach((lesson) =>
       courseDomain.getLesson().push(new Lesson(lesson)),
     );
+    return courseDomain;
   }
 
   private convertLessonDataModelInLessonDomain(

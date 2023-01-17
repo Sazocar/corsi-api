@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Lesson } from './Lesson';
+import { LessonInfraestructure } from './Lesson';
 import { Person } from 'src/Person/Infrastructure/entities/person';
 
 @Entity()
@@ -24,8 +24,8 @@ export class CourseInfraestructure {
   @Column({ type: 'text' })
   description: string;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.course)
-  lessons: Lesson[];
+  @OneToMany(() => LessonInfraestructure, (lesson) => lesson.course)
+  lessons: LessonInfraestructure[];
 
   @Column()
   categories: string; // Should be an Category[] in the future
@@ -53,4 +53,31 @@ export class CourseInfraestructure {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  static create(
+    id: number,
+    courseId: string,
+    title: string,
+    description: string,
+    lessons: LessonInfraestructure[],
+    categories: string,
+    keywords: string,
+    state: string,
+    imageUrl: string,
+    students?: Person[],
+  ): CourseInfraestructure {
+    const courseInfraestructure = new CourseInfraestructure();
+    courseInfraestructure.id = id;
+    courseInfraestructure.courseId = courseId;
+    courseInfraestructure.title = title;
+    courseInfraestructure.description = description;
+    courseInfraestructure.lessons = lessons;
+    courseInfraestructure.categories = categories;
+    courseInfraestructure.keywords = keywords;
+    courseInfraestructure.state = state;
+    courseInfraestructure.imageUrl = imageUrl;
+    courseInfraestructure.students = students;
+
+    return courseInfraestructure;
+  }
 }
