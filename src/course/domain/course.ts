@@ -1,9 +1,14 @@
-import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Lesson } from './entities/lesson';
 import { IMemento } from 'src/shared/IMemento';
 import { CourseMemento } from './CourseMemento';
+import { ImageCourse } from './value_objects/imagecourse';
+import { DescriptionCourse } from './value_objects/descrption';
+import { CourseID } from 'src/shared/value_objects/idcourse';
 import { CourseTitle } from './value_objects/CourseTitle';
 import { CourseSubTitle } from './value_objects/CourseSubTitle';
+import { CourseState } from './value_objects/courseState';
+import { Coursecategory } from './value_objects/coursecategory';
+import { Keyword } from './value_objects/keyword';
 export class Course {
   private imageCourse: ImageCourse;
   private descriptionCourse: DescriptionCourse;

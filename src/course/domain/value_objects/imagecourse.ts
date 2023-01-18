@@ -1,4 +1,4 @@
-class ImageCourse {
+export class ImageCourse {
   private url: string;
 
   constructor(url: string) {
