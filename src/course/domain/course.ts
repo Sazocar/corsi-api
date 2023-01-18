@@ -100,7 +100,7 @@ export class Course {
     courseTitle: string,
     courseSubTitle: string,
     courseState: string,
-    courseCategory: Coursecategory,
+    courseCategory: string,
     keywords: string[],
     lessons: Array<Lesson>,
   ): Course {

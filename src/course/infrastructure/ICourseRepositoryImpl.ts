@@ -76,11 +76,20 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //   }
 
   private convertCourseFromInfraestructureToDomain(
-    courseDataModel: CourseInfraestructure,
-  ) {
-    const courseInfraestructure: CourseInfraestructure =
-      CourseInfraestructure.create(courseDataModel.courseId,);
-    return courseInfraestructure;
+    CourseInfraestructure: CourseInfraestructure,
+  ): Course {
+    const courseDomain: Course = Course.create(
+      CourseInfraestructure.imageUrl,
+      CourseInfraestructure.description,
+      CourseInfraestructure.courseId,
+      CourseInfraestructure.title,
+      CourseInfraestructure.subTitle,
+      CourseInfraestructure.state,
+      CourseInfraestructure.categories,
+      CourseInfraestructure.keywords,
+      CourseInfraestructure.lessons,
+    );
+    return courseDomain;
   }
 
   private convertLessonDataModelInLessonDomain(

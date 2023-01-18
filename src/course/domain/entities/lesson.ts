@@ -3,7 +3,7 @@ export class Lesson {
   private _lessonDescription: DescriptionLesson;
   private _videolesson: Videolesson;
   private _lessonid: LessonId;
-  private _comments: Array<CommentLesson>;
+  //private _comments: Array<CommentLesson>;
 
   constructor();
   constructor(lesson: Lesson);
@@ -12,7 +12,7 @@ export class Lesson {
       this._lessonDescription = lesson._lessonDescription;
       this._videolesson = lesson._videolesson;
       this._lessonid = lesson._lessonid;
-      this._comments = lesson._comments;
+      //this._comments = lesson._comments;
     }
   }
 
@@ -37,10 +37,21 @@ export class Lesson {
     this._lessonid = value;
   }
 
-  public get comments(): Array<CommentLesson> {
-    return this._comments;
-  }
-  public set comments(value: Array<CommentLesson>) {
-    this._comments = value;
+  //public get comments(): Array<CommentLesson> {
+  //  return this._comments;
+  //}
+  //public set comments(value: Array<CommentLesson>) {
+  //  this._comments = value;
+  //}
+  static create(
+    lessonDescription: string,
+    videolesson: string,
+    lessonid: string,
+  ): Lesson {
+    const lessonDomain = new Lesson();
+    lessonDomain._lessonDescription = new DescriptionLesson(lessonDescription);
+    lessonDomain._videolesson = new Videolesson(videolesson);
+    lessonDomain._lessonid = new LessonId(lessonid);
+    return lessonDomain;
   }
 }
