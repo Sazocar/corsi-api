@@ -146,7 +146,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
         courseDomain.getTitle().getTitle(),
         courseDomain.getDescriptionCourse().getDescription(),
         this.convertLessonFromDomainToInfraestructure(courseDomain.getLesson()),
-        courseDomain.getCourseCategory().toString(),
+        courseDomain.getCourseCategory(),
         courseDomain.getKeyword().getKeyword(),
         courseDomain.getCourseState(),
         courseDomain.getImageCourse().getImage(),
