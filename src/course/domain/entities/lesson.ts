@@ -56,11 +56,13 @@ export class Lesson {
     lessonDescription: string,
     videolesson: string,
     lessonid: string,
+    lessonTitle: string,
   ): Lesson {
     const lessonDomain = new Lesson();
     lessonDomain._lessonDescription = new DescriptionLesson(lessonDescription);
     lessonDomain._videolesson = new Videolesson(videolesson);
     lessonDomain._lessonid = new LessonId(lessonid);
+    lessonDomain._lessonTitle = new LessonTitle(lessonTitle);
     return lessonDomain;
   }
 }

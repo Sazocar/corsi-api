@@ -127,7 +127,12 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (lessonInfraestructure != null) {
       lessonInfraestructure.forEach((lesson) => {
         lessonDomain.push(
-          Lesson.create(lesson.description, lesson.videoUrl, lesson.lessonId),
+          Lesson.create(
+            lesson.description,
+            lesson.videoUrl,
+            lesson.lessonId,
+            lesson.title,
+          ),
         );
       });
     }
