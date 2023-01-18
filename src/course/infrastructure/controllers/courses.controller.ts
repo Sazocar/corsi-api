@@ -43,10 +43,16 @@ export class CoursesController {
     return this.courseRepo.findCourse(courseId);
   }
 
+  // @Get('/categories/:category')
+  // findcategory(@Param('category') category: string) {
+  //   return this.coursesServices.getCoursebycategory(category);
+  // }
+
   @Get('/categories/:category')
   findcategory(@Param('category') category: string) {
-    return this.coursesServices.getCoursebycategory(category);
+    return this.courseRepo.findCoursesByCategory(category);
   }
+
   @Get('/keyword/:keyword')
   findkeyword(@Param('keyword') keyword: string) {
     return this.coursesServices.getCoursebykeyword(keyword);
