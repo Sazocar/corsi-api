@@ -101,7 +101,7 @@ export class Course {
     courseSubTitle: string,
     courseState: string,
     courseCategory: Coursecategory,
-    keywords: Array<Keyword>,
+    keywords: string[],
     lessons: Array<Lesson>,
   ): Course {
     const courseDomain = new Course();
@@ -135,7 +135,10 @@ export class Course {
     if (courseCategory == 'finanzas') {
       courseDomain.courseCategory = Coursecategory.finanzas;
     }
-    courseDomain.keywords = keywords;
+    courseDomain.keywords = new Array<Keyword>();
+    keywords.forEach((keyword) => {
+      courseDomain.keywords.push(new Keyword(keyword));
+    });
     courseDomain.lessons = lessons;
 
     return courseDomain;
