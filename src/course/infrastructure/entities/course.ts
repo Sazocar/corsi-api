@@ -36,7 +36,7 @@ export class CourseInfraestructure {
   @Column()
   keywords: string;
 
-  @Column({ default: 'Created' })
+  @Column({ default: 'Published' })
   state: string;
 
   @ManyToMany(() => Person, (person) => person.courses)

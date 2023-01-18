@@ -19,6 +19,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
 
   async findCourses() {
     const courseInfreaestructure = await this.courseRepo.find({
+      where: { state: 'Published' },
       relations: ['lessons'],
     });
     const coursesDomain = new Array<Course>();
