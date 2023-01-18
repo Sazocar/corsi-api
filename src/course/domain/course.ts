@@ -112,6 +112,9 @@ export class Course {
     lessons: Array<Lesson>,
   ): Course {
     const courseDomain = new Course();
+    if (imageCourse == null) {
+      courseDomain.imageCourse = new ImageCourse('no tengo enlace');
+    }
     courseDomain.imageCourse = new ImageCourse(imageCourse);
     courseDomain.descriptionCourse = new DescriptionCourse(descriptionCourse);
     courseDomain.courseid = new CourseID(courseid);
