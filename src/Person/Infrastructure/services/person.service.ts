@@ -8,13 +8,14 @@ import {
   NotFoundException,
 } from '@nestjs/common/exceptions';
 import { In, Repository } from 'typeorm';
-import { Course } from 'src/course/infrastructure/entities/course';
+import { CourseInfraestructure } from 'src/course/infrastructure/entities/course';
 
 @Injectable()
 export class PersonService {
   constructor(
     @InjectRepository(Person) private personRepo: Repository<Person>,
-    @InjectRepository(Course) private courseRepo: Repository<Course>,
+    @InjectRepository(CourseInfraestructure)
+    private courseRepo: Repository<CourseInfraestructure>,
   ) {}
 
   /* suscribeService(student: Student, course: Course) {

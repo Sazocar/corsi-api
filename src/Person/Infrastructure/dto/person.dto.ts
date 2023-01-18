@@ -8,9 +8,9 @@ import {
   IsArray,
   IsPositive,
 } from 'class-validator';
-import { Course } from 'src/course/infrastructure/entities/course';
+import { CourseInfraestructure } from 'src/course/infrastructure/entities/course';
 export class CreatePersonDto {
-  readonly courses?: Course[];
+  readonly courses?: CourseInfraestructure[];
   @IsString()
   @IsNotEmpty()
   @ApiProperty()

@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
-import { Lesson } from '../entities/Lesson';
+import { LessonInfraestructure } from '../entities/Lesson';
 import { Student } from 'src/Person/Infrastructure/entities/student';
 
 export class CreateCourseDto {
@@ -20,7 +20,7 @@ export class CreateCourseDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  readonly lessons: Lesson[];
+  readonly lessons: LessonInfraestructure[];
 
   @IsString()
   @IsNotEmpty()

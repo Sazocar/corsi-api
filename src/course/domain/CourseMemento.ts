@@ -18,7 +18,7 @@ export class CourseMemento implements IMemento {
     this.courseid = course.getCourseId();
     this.courseState = course.getCourseState();
     this.courseCategory = course.getCourseCategory();
-    this.keywords = course.getKeywords();
+    //this.keywords = course.getKeywords();
     this.lessons = course.getLesson();
   }
 

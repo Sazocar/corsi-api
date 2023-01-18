@@ -1,4 +1,4 @@
-import { Course } from 'src/course/infrastructure/entities/course';
+import { CourseInfraestructure } from 'src/course/infrastructure/entities/course';
 import {
   Column,
   CreateDateColumn,
@@ -14,9 +14,9 @@ export class Person {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToMany(() => Course, (course) => course.students)
+  @ManyToMany(() => CourseInfraestructure, (course) => course.students)
   @JoinTable()
-  courses?: Course[];
+  courses?: CourseInfraestructure[];
 
   @Column()
   name: string;
