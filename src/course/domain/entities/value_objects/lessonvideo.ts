@@ -6,4 +6,7 @@ class Videolesson {
   Videolesson(url: string) {
     this.url = url;
   }
+  getVideo(): string {
+    return this.url;
+  }
 }

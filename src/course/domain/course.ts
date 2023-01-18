@@ -12,7 +12,7 @@ export class Course {
   private courseSubTitle: CourseSubTitle;
   private courseState: CourseState;
   private courseCategory: Coursecategory;
-  private keywords: Keyword;
+  private keyword: Keyword;
   private lessons: Array<Lesson>;
 
   constructor();
@@ -37,6 +37,13 @@ export class Course {
     return new Course(courseMemento);
   }
 
+  public getTitle(): CourseTitle {
+    return this.courseTitle;
+  }
+
+  public getKeyword(): Keyword {
+    return this.keyword;
+  }
   public getImageCourse(): ImageCourse {
     return this.imageCourse;
   }
@@ -135,7 +142,7 @@ export class Course {
     if (courseCategory == 'finanzas') {
       courseDomain.courseCategory = Coursecategory.finanzas;
     }
-    courseDomain.keywords = new Keyword(keyword);
+    courseDomain.keyword = new Keyword(keyword);
     courseDomain.lessons = lessons;
 
     return courseDomain;

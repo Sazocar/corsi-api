@@ -7,4 +7,7 @@ class DescriptionCourse {
       throw console.error('la descrpcion es muy larga');
     }
   }
+  getDescription(): string {
+    return this.descriptionCourse;
+  }
 }

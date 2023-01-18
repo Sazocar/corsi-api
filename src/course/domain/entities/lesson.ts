@@ -1,8 +1,10 @@
 import { LessonId } from './value_objects/idlesson';
+import { LessonTitle } from './value_objects/lessonTitle';
 export class Lesson {
   private _lessonDescription: DescriptionLesson;
   private _videolesson: Videolesson;
   private _lessonid: LessonId;
+  private _lessonTitle: LessonTitle;
   //private _comments: Array<CommentLesson>;
 
   constructor();
@@ -12,28 +14,33 @@ export class Lesson {
       this._lessonDescription = lesson._lessonDescription;
       this._videolesson = lesson._videolesson;
       this._lessonid = lesson._lessonid;
+      this._lessonTitle = lesson._lessonTitle;
       //this._comments = lesson._comments;
     }
   }
 
-  public get lessonDescription(): DescriptionLesson {
+  public getlessonDescription(): DescriptionLesson {
     return this._lessonDescription;
   }
-  public set lessonDescription(value: DescriptionLesson) {
+  public setlessonDescription(value: DescriptionLesson) {
     this._lessonDescription = value;
   }
 
-  public get videolesson(): Videolesson {
+  public getLessonTitle(): LessonTitle {
+    return this._lessonTitle;
+  }
+
+  public getvideolesson(): Videolesson {
     return this._videolesson;
   }
-  public set videolesson(value: Videolesson) {
+  public setvideolesson(value: Videolesson) {
     this._videolesson = value;
   }
 
-  public get lessonid(): LessonId {
+  public getlessonid(): LessonId {
     return this._lessonid;
   }
-  public set lessonid(value: LessonId) {
+  public setlessonid(value: LessonId) {
     this._lessonid = value;
   }
 

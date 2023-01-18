@@ -11,4 +11,7 @@ export class LessonId {
       this.id = randomUUID();
     }
   }
+  getId(): string {
+    return this.id;
+  }
 }

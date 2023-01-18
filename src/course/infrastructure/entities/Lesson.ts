@@ -41,4 +41,17 @@ export class LessonInfraestructure {
     onDelete: 'CASCADE',
   })
   course: CourseInfraestructure;
+  static create(
+    title: string,
+    description: string,
+    videoUrl: string,
+    lessonId: string,
+  ): LessonInfraestructure {
+    const lessonInfraestructure = new LessonInfraestructure();
+    lessonInfraestructure.title = title;
+    lessonInfraestructure.description = description;
+    lessonInfraestructure.videoUrl = videoUrl;
+    lessonInfraestructure.lessonId = lessonId;
+    return lessonInfraestructure;
+  }
 }

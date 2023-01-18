@@ -75,7 +75,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //     throw new Error('Method not implemented.');
   //   }
 
-  private convertCourseFromInfraestructureToDomain(
+  convertCourseFromInfraestructureToDomain(
     courseInfraestructure: CourseInfraestructure,
   ): Course {
     const courseDomain: Course = Course.create(
@@ -87,14 +87,16 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       courseInfraestructure.state,
       courseInfraestructure.categories,
       courseInfraestructure.keywords,
-      this.convertLessonInfraestructureInDomain(courseInfraestructure.lessons),
+      this.convertLessonFromInfraestructureToDomain(
+        courseInfraestructure.lessons,
+      ),
     );
     return courseDomain;
   }
 
-  private convertLessonInfraestructureInDomain(
+  convertLessonFromInfraestructureToDomain(
     lessonInfraestructure: Array<LessonInfraestructure>,
-  ) {
+  ): Array<Lesson> {
     const lessonDomain = new Array<Lesson>();
     lessonInfraestructure.forEach((lesson) => {
       lessonDomain.push(
@@ -102,5 +104,39 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       );
     });
     return lessonDomain;
+  }
+
+  convertCourseFromDomainToInfraestructure(
+    courseDomain: Course,
+  ): CourseInfraestructure {
+    const courseInfraestructure: CourseInfraestructure =
+      CourseInfraestructure.create(
+        courseDomain.getCourseId().getId(),
+        courseDomain.getTitle().getTitle(),
+        courseDomain.getDescriptionCourse().getDescription(),
+        this.convertLessonFromDomainToInfraestructure(courseDomain.getLesson()),
+        courseDomain.getCourseCategory().toString(),
+        courseDomain.getKeyword().getKeyword(),
+        courseDomain.getCourseState().toString(),
+        courseDomain.getImageCourse().getImage(),
+      );
+    return courseInfraestructure;
+  }
+
+  convertLessonFromDomainToInfraestructure(
+    lessonDomain: Array<Lesson>,
+  ): Array<LessonInfraestructure> {
+    const lessonInfraestructure = new Array<LessonInfraestructure>();
+    lessonDomain.forEach((lesson) => {
+      lessonInfraestructure.push(
+        LessonInfraestructure.create(
+          lesson.getlessonDescription().getDescription(),
+          lesson.getvideolesson().getVideo(),
+          lesson.getlessonid().getId(),
+          lesson.getLessonTitle().getTitle(),
+        ),
+      );
+    });
+    return lessonInfraestructure;
   }
 }

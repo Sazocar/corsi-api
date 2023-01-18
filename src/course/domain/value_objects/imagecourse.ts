@@ -8,4 +8,7 @@ class ImageCourse {
   ImageCourse(url: string) {
     this.url = url;
   }
+  getImage(): string {
+    return this.url;
+  }
 }

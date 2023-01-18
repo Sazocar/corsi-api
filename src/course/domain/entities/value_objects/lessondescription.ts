@@ -14,4 +14,7 @@ class DescriptionLesson {
       throw console.error('descripcion muy larga');
     }
   }
+  getDescription(): string {
+    return this.description;
+  }
 }

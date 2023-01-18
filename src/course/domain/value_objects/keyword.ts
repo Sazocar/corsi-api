@@ -7,4 +7,7 @@ class Keyword {
       throw console.error('palabra demasiado grande');
     }
   }
+  getKeyword(): string {
+    return this.keyword;
+  }
 }
