@@ -5,17 +5,21 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLessonDto, UpdateLessonDto } from '../dtos/lesson.dto';
 import { LessonService } from '../services/lesson.service';
+import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
 
 // @ApiBearerAuth()
 @ApiTags('Lessons')
 // @UseGuards(JwtAuthGuard)
 @Controller('lessons')
 export class LessonController {
-  constructor(private lessonService: LessonService) {}
+  constructor(
+    private lessonService: LessonService,
+    private lessonRepo: ICourseRepositoryImpl,
+  ) {}
 
   @Get()
   getLessons() {
-    return this.lessonService.findAll();
+    return this.lessonRepo.findLessons();
   }
 
   @Get(':lessonId')

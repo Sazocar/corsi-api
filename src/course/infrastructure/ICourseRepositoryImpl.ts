@@ -13,6 +13,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   constructor(
     @InjectRepository(CourseInfraestructure)
     private courseRepo: Repository<CourseInfraestructure>,
+    private lessonRepo: Repository<LessonInfraestructure>,
   ) {}
 
   async findCourses() {
@@ -81,6 +82,14 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       coursesDomain.push(this.convertCourseFromInfraestructureToDomain(course)),
     );
     return coursesDomain;
+  }
+
+  async findLessons() {
+    const lessonsInfreaestructure = await this.lessonRepo.find();
+    const lessonsDomain = this.convertLessonFromInfraestructureToDomain(
+      lessonsInfreaestructure,
+    );
+    return lessonsDomain;
   }
 
   //   updateCourse(course: Course) {
