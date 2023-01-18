@@ -19,6 +19,7 @@ import { CourseID } from 'src/shared/value_objects/idcourse';
 import { CourseInfraestructure } from '../entities/course';
 import { GetCoursesService } from 'src/course/aplication/aplication-service/GetCoursesService';
 import { GethPublishedService } from 'src/course/aplication/aplication-service/serachPublisheService';
+import { FindById } from 'src/course/aplication/aplication-service/findbyid';
 
 // @ApiBearerAuth()
 @ApiTags('Courses')
@@ -64,7 +65,8 @@ export class CoursesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     const courseId = new CourseID(id);
-    return this.courseRepo.findCourse(courseId);
+    const service = new FindById(courseId);
+    return service.execute(this.courseRepo);
   }
 
   // @Get('/categories/:category')
