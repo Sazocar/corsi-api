@@ -16,6 +16,16 @@ export class CreateLessonDto {
   @IsNotEmpty()
   @ApiProperty()
   readonly courseId: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly videoUrl: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly lessonId: string;
 }
 
 export class UpdateLessonDto extends PartialType(CreateLessonDto) {}

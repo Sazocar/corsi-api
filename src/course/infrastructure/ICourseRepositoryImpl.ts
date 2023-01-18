@@ -57,7 +57,6 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   async findCoursesByCategory(categories: string) {
     const courseInfreaestructure = await this.courseRepo.findBy({
       categories: categories,
-      state: 'Published',
     });
     if (!courseInfreaestructure) {
       throw new NotFoundException('Course not found');
@@ -115,11 +114,13 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     lessonInfraestructure: Array<LessonInfraestructure>,
   ) {
     const lessonDomain = new Array<Lesson>();
-    lessonInfraestructure.forEach((lesson) => {
-      lessonDomain.push(
-        Lesson.create(lesson.description, lesson.videoUrl, lesson.lessonId),
-      );
-    });
+    if (lessonInfraestructure != null) {
+      lessonInfraestructure.forEach((lesson) => {
+        lessonDomain.push(
+          Lesson.create(lesson.description, lesson.videoUrl, lesson.lessonId),
+        );
+      });
+    }
     return lessonDomain;
   }
 
@@ -142,16 +143,18 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     lessonDomain: Array<Lesson>,
   ) {
     const lessonInfraestructure = new Array<LessonInfraestructure>();
-    lessonDomain.forEach((lesson) => {
-      lessonInfraestructure.push(
-        LessonInfraestructure.create(
-          lesson.getlessonDescription().getDescription(),
-          lesson.getvideolesson().getVideo(),
-          lesson.getlessonid().getId(),
-          lesson.getLessonTitle().getTitle(),
-        ),
-      );
-    });
+    if (lessonDomain != null) {
+      lessonDomain.forEach((lesson) => {
+        lessonInfraestructure.push(
+          LessonInfraestructure.create(
+            lesson.getlessonDescription().getDescription(),
+            lesson.getvideolesson().getVideo(),
+            lesson.getlessonid().getId(),
+            lesson.getLessonTitle().getTitle(),
+          ),
+        );
+      });
+    }
     return lessonInfraestructure;
   }
 }
