@@ -41,38 +41,47 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   }
 
   async findPublishedCourses() {
-    const courses = await this.courseRepo.findBy({
+    const courseInfreaestructure = await this.courseRepo.findBy({
       state: 'Published',
     });
-    if (!courses) {
+    if (!courseInfreaestructure) {
       throw new NotFoundException(`Courses not found`);
     }
-    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
-    return courseDomain;
+    const coursesDomain = new Array<Course>();
+    courseInfreaestructure.forEach((course) =>
+      coursesDomain.push(this.convertCourseFromInfraestructureToDomain(course)),
+    );
+    return coursesDomain;
   }
 
   async findCoursesByCategory(categories: string) {
-    const course = await this.courseRepo.findBy({
+    const courseInfreaestructure = await this.courseRepo.findBy({
       categories: categories,
       state: 'Published',
     });
-    if (!course) {
-      throw new NotFoundException('Courses not found');
+    if (!courseInfreaestructure) {
+      throw new NotFoundException('Course not found');
     }
-    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
-    return courseDomain;
+    const coursesDomain = new Array<Course>();
+    courseInfreaestructure.forEach((course) =>
+      coursesDomain.push(this.convertCourseFromInfraestructureToDomain(course)),
+    );
+    return coursesDomain;
   }
 
   async findCourseByKeywords(keywords: string) {
-    const course = await this.courseRepo.findBy({
+    const courseInfreaestructure = await this.courseRepo.findBy({
       keywords: keywords,
       state: 'Published',
     });
-    if (!course) {
+    if (!courseInfreaestructure) {
       throw new NotFoundException('Course not found');
     }
-    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
-    return courseDomain;
+    const coursesDomain = new Array<Course>();
+    courseInfreaestructure.forEach((course) =>
+      coursesDomain.push(this.convertCourseFromInfraestructureToDomain(course)),
+    );
+    return coursesDomain;
   }
 
   //   updateCourse(course: Course) {
