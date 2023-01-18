@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm/dist';
 import { Repository } from 'typeorm';
 import { CreateLessonDto, UpdateLessonDto } from '../dtos/lesson.dto';
-import { LessonInfraestructure } from '../Entities/Lesson';
+import { LessonInfraestructure } from '../entities/Lesson';
 import { CoursesService } from './courses.service';
 
 @Injectable()

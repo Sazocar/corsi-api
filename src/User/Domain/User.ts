@@ -1,6 +1,6 @@
 import { PersonId } from 'src/shared/value_objects/PersonId';
 import { UserPassword } from './Value_Objects/UserPassword';
-import { UserEmail } from './Value_Objects/userEmail';
+import { UserEmail } from './Value_Objects/UserEmail';
 
 export class User {
   private userEmail: UserEmail;
