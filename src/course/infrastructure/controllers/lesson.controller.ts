@@ -6,9 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLessonDto, UpdateLessonDto } from '../dtos/lesson.dto';
 import { LessonService } from '../services/lesson.service';
 
-@ApiBearerAuth()
 @ApiTags('Lessons')
-@UseGuards(JwtAuthGuard)
 @Controller('lessons')
 export class LessonController {
   constructor(private lessonService: LessonService) {}
