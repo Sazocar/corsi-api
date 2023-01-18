@@ -114,8 +114,9 @@ export class Course {
     const courseDomain = new Course();
     if (imageCourse == null) {
       courseDomain.imageCourse = new ImageCourse('no tengo enlace');
+    } else {
+      courseDomain.imageCourse = new ImageCourse(imageCourse);
     }
-    courseDomain.imageCourse = new ImageCourse(imageCourse);
     courseDomain.descriptionCourse = new DescriptionCourse(descriptionCourse);
     courseDomain.courseid = new CourseID(courseid);
     courseDomain.courseTitle = new CourseTitle(courseTitle);
