@@ -7,7 +7,17 @@ export class CreateCourseDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
+  readonly courseId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
   readonly title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly subTitle: string;
 
   @IsString()
   @IsNotEmpty()
@@ -26,6 +36,11 @@ export class CreateCourseDto {
   @IsNotEmpty()
   @ApiProperty()
   readonly keywords: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly imageUrl: string;
 
   @ApiProperty()
   readonly state: string;
