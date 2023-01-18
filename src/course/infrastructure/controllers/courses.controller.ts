@@ -17,6 +17,9 @@ import { CoursesService } from '../services/courses.service';
 import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { CourseInfraestructure } from '../entities/course';
+import { GetCoursesService } from 'src/course/aplication/aplication-service/GetCoursesService';
+import { GethPublishedService } from 'src/course/aplication/aplication-service/serachPublisheService';
+import { FindById } from 'src/course/aplication/aplication-service/findbyid';
 
 // @ApiBearerAuth()
 @ApiTags('Courses')
@@ -30,9 +33,23 @@ export class CoursesController {
 
   @Get()
   async findCourses() {
-    const courses = await this.courseRepo.findCourses();
+    const service = new GetCoursesService();
+    const courses = service.execute(this.courseRepo);
     const coursesInfraestructure = new Array<CourseInfraestructure>();
-    courses.forEach((course) => {
+    (await courses).forEach((course) => {
+      coursesInfraestructure.push(
+        ICourseRepositoryImpl.convertCourseFromDomainToInfraestructure(course),
+      );
+    });
+    return coursesInfraestructure;
+  }
+
+  @Get('published')
+  async findpublishedCourses() {
+    const service = new GethPublishedService();
+    const courses = service.execute(this.courseRepo);
+    const coursesInfraestructure = new Array<CourseInfraestructure>();
+    (await courses).forEach((course) => {
       coursesInfraestructure.push(
         ICourseRepositoryImpl.convertCourseFromDomainToInfraestructure(course),
       );
@@ -48,7 +65,8 @@ export class CoursesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     const courseId = new CourseID(id);
-    return this.courseRepo.findCourse(courseId);
+    const service = new FindById(courseId);
+    return service.execute(this.courseRepo);
   }
 
   // @Get('/categories/:category')

@@ -1,4 +1,4 @@
-enum AccountState {
+export enum AccountState {
   ACTIVE,
   BLOCKED,
 }
