@@ -7,6 +7,7 @@ import { LessonInfraestructure } from './entities/Lesson';
 import { LessonController } from './controllers/lesson.controller';
 import { LessonService } from './services/lesson.service';
 import { ICourseRepositoryImpl } from './ICourseRepositoryImpl';
+import { Person } from 'src/Person/Domain/Person';
 
 @Module({
   imports: [
