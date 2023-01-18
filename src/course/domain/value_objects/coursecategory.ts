@@ -1,6 +1,6 @@
 enum Coursecategory {
-  programacion,
-  idiomas,
-  matematicas,
-  finanzas,
+  programacion = 'programacion',
+  idiomas = 'idiomas',
+  matematicas = 'matematicas',
+  finanzas = 'finanzas',
 }

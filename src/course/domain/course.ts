@@ -2,8 +2,8 @@ import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Lesson } from './entities/lesson';
 import { IMemento } from 'src/shared/IMemento';
 import { CourseMemento } from './CourseMemento';
-import { CourseTitle } from './entities/value_objects/CourseTitle';
-import { CourseSubTitle } from './entities/value_objects/CourseSubTitle';
+import { CourseTitle } from './value_objects/CourseTitle';
+import { CourseSubTitle } from './value_objects/CourseSubTitle';
 export class Course {
   private imageCourse: ImageCourse;
   private descriptionCourse: DescriptionCourse;
@@ -94,24 +94,47 @@ export class Course {
   }
 
   static create(
-    imageCourse: ImageCourse,
-    descriptionCourse: DescriptionCourse,
-    courseid: CourseID,
-    courseTitle: CourseTitle,
-    courseSubTitle: CourseSubTitle,
-    courseState: CourseState,
+    imageCourse: string,
+    descriptionCourse: string,
+    courseid: string,
+    courseTitle: string,
+    courseSubTitle: string,
+    courseState: string,
     courseCategory: Coursecategory,
     keywords: Array<Keyword>,
     lessons: Array<Lesson>,
   ): Course {
     const courseDomain = new Course();
-    courseDomain.imageCourse = imageCourse;
-    courseDomain.descriptionCourse = descriptionCourse;
-    courseDomain.courseid = courseid;
-    courseDomain.courseTitle = courseTitle;
-    courseDomain.courseSubTitle = courseSubTitle;
-    courseDomain.courseState = courseState;
-    courseDomain.courseCategory = courseCategory;
+    courseDomain.imageCourse = new ImageCourse(imageCourse);
+    courseDomain.descriptionCourse = new DescriptionCourse(descriptionCourse);
+    courseDomain.courseid = new CourseID(courseid);
+    courseDomain.courseTitle = new CourseTitle(courseTitle);
+    courseDomain.courseSubTitle = new CourseSubTitle(courseSubTitle);
+    //Esto se puede hacer con un patron estado
+    if (courseState == 'Created') {
+      courseDomain.courseState = CourseState.Created;
+    }
+    if (courseState == 'Deleted') {
+      courseDomain.courseState = CourseState.Deleted;
+    }
+    if (courseState == 'Published') {
+      courseDomain.courseState = CourseState.Published;
+    }
+    if (courseState == 'Suspended') {
+      courseDomain.courseState = CourseState.Suspended;
+    }
+    if (courseCategory == 'programacion') {
+      courseDomain.courseCategory = Coursecategory.programacion;
+    }
+    if (courseCategory == 'idiomas') {
+      courseDomain.courseCategory = Coursecategory.idiomas;
+    }
+    if (courseCategory == 'matematicas') {
+      courseDomain.courseCategory = Coursecategory.matematicas;
+    }
+    if (courseCategory == 'finanzas') {
+      courseDomain.courseCategory = Coursecategory.finanzas;
+    }
     courseDomain.keywords = keywords;
     courseDomain.lessons = lessons;
 

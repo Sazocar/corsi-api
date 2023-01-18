@@ -1,6 +1,6 @@
 enum CourseState {
-  Created,
-  Deleted,
-  Published,
-  Suspended,
+  Created = 'Created',
+  Deleted = 'Deleted',
+  Published = 'Published',
+  Suspended = 'Suspended',
 }
