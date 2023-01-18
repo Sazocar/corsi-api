@@ -76,30 +76,31 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //   }
 
   private convertCourseFromInfraestructureToDomain(
-    CourseInfraestructure: CourseInfraestructure,
+    courseInfraestructure: CourseInfraestructure,
   ): Course {
     const courseDomain: Course = Course.create(
-      CourseInfraestructure.imageUrl,
-      CourseInfraestructure.description,
-      CourseInfraestructure.courseId,
-      CourseInfraestructure.title,
-      CourseInfraestructure.subTitle,
-      CourseInfraestructure.state,
-      CourseInfraestructure.categories,
-      CourseInfraestructure.keywords,
-      CourseInfraestructure.lessons,
+      courseInfraestructure.imageUrl,
+      courseInfraestructure.description,
+      courseInfraestructure.courseId,
+      courseInfraestructure.title,
+      courseInfraestructure.subTitle,
+      courseInfraestructure.state,
+      courseInfraestructure.categories,
+      courseInfraestructure.keywords,
+      this.convertLessonInfraestructureInDomain(courseInfraestructure.lessons),
     );
     return courseDomain;
   }
 
-  private convertLessonDataModelInLessonDomain(
-    lessonDataModel: LessonInfraestructure,
+  private convertLessonInfraestructureInDomain(
+    lessonInfraestructure: Array<LessonInfraestructure>,
   ) {
-    const lessonDomain = new Lesson();
-    lessonDomain.lessonDescription = new DescriptionLesson(
-      lessonDataModel.description,
-    );
-    lessonDomain.videolesson = new Videolesson(lessonDataModel.videoUrl);
-    lessonDomain.lessonid = new LessonId(lessonDataModel.lessonId);
+    const lessonDomain = new Array<Lesson>();
+    lessonInfraestructure.forEach((lesson) => {
+      lessonDomain.push(
+        Lesson.create(lesson.description, lesson.videoUrl, lesson.lessonId),
+      );
+    });
+    return lessonDomain;
   }
 }

@@ -12,7 +12,7 @@ export class Course {
   private courseSubTitle: CourseSubTitle;
   private courseState: CourseState;
   private courseCategory: Coursecategory;
-  private keywords: Array<Keyword>;
+  private keywords: Keyword;
   private lessons: Array<Lesson>;
 
   constructor();
@@ -24,7 +24,7 @@ export class Course {
       this.courseid = snapshot.getCourseId();
       this.courseState = snapshot.getCourseState();
       this.courseCategory = snapshot.getCourseCategory();
-      this.keywords = snapshot.getKeywords();
+      //this.keywords = snapshot.getKeywords();
       this.lessons = snapshot.getLesson();
     }
   }
@@ -57,9 +57,9 @@ export class Course {
     return this.courseCategory;
   }
 
-  public getKeywords(): Array<Keyword> {
-    return this.keywords;
-  }
+  // public getKeywords(): Array<Keyword> {
+  //   return this.keywords;
+  // }
 
   public getLesson(): Array<Lesson> {
     return this.lessons;
@@ -85,9 +85,9 @@ export class Course {
     this.courseCategory = courseCategory;
   }
 
-  public setKeywords(keywords: Array<Keyword>): void {
-    this.keywords = keywords;
-  }
+  // public setKeywords(keywords: Array<Keyword>): void {
+  //   this.keywords = keywords;
+  // }
 
   public setLessons(lessons: Array<Lesson>): void {
     this.lessons = lessons;
@@ -101,7 +101,7 @@ export class Course {
     courseSubTitle: string,
     courseState: string,
     courseCategory: string,
-    keywords: string[],
+    keyword: string,
     lessons: Array<Lesson>,
   ): Course {
     const courseDomain = new Course();
@@ -135,10 +135,7 @@ export class Course {
     if (courseCategory == 'finanzas') {
       courseDomain.courseCategory = Coursecategory.finanzas;
     }
-    courseDomain.keywords = new Array<Keyword>();
-    keywords.forEach((keyword) => {
-      courseDomain.keywords.push(new Keyword(keyword));
-    });
+    courseDomain.keywords = new Keyword(keyword);
     courseDomain.lessons = lessons;
 
     return courseDomain;
