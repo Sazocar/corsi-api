@@ -14,17 +14,22 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
 import { CoursesService } from '../services/courses.service';
+import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
+import { CourseID } from 'src/shared/value_objects/idcourse';
 
 @ApiBearerAuth()
 @ApiTags('Courses')
 @UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
-  constructor(private coursesServices: CoursesService) {}
+  constructor(
+    private coursesServices: CoursesService,
+    private courseRepo: ICourseRepositoryImpl,
+  ) {}
 
   @Get()
   findCourses() {
-    return this.coursesServices.getAllCourses();
+    return this.courseRepo.findCourses();
   }
 
   @Get(':id')

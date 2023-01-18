@@ -6,12 +6,13 @@ import { CoursesService } from './services/courses.service';
 import { LessonInfraestructure } from './entities/Lesson';
 import { LessonController } from './controllers/lesson.controller';
 import { LessonService } from './services/lesson.service';
+import { ICourseRepositoryImpl } from './ICourseRepositoryImpl';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([LessonInfraestructure, CourseInfraestructure]),
   ],
   controllers: [CoursesController, LessonController],
-  providers: [CoursesService, LessonService],
+  providers: [CoursesService, LessonService, ICourseRepositoryImpl],
 })
 export class CourseModule {}
