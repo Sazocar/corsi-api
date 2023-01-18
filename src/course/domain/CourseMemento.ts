@@ -2,6 +2,11 @@ import { IMemento } from 'src/shared/IMemento';
 import { Lesson } from './entities/lesson';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { Course } from './course';
+import { ImageCourse } from './value_objects/imagecourse';
+import { DescriptionCourse } from './value_objects/descrption';
+import { CourseState } from './value_objects/courseState';
+import { Coursecategory } from './value_objects/coursecategory';
+import { Keyword } from './value_objects/keyword';
 
 export class CourseMemento implements IMemento {
   private imageCourse: ImageCourse;

@@ -13,6 +13,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   constructor(
     @InjectRepository(CourseInfraestructure)
     private courseRepo: Repository<CourseInfraestructure>,
+    @InjectRepository(LessonInfraestructure)
     private lessonRepo: Repository<LessonInfraestructure>,
   ) {}
 
