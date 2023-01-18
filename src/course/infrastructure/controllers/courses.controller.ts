@@ -17,6 +17,7 @@ import { CoursesService } from '../services/courses.service';
 import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 import { CourseInfraestructure } from '../entities/course';
+import { GetCoursesService } from 'src/course/aplication/aplication-service/GetCoursesService';
 
 // @ApiBearerAuth()
 @ApiTags('Courses')
@@ -30,9 +31,10 @@ export class CoursesController {
 
   @Get()
   async findCourses() {
-    const courses = await this.courseRepo.findCourses();
+    const service = new GetCoursesService();
+    const courses = service.execute(this.courseRepo);
     const coursesInfraestructure = new Array<CourseInfraestructure>();
-    courses.forEach((course) => {
+    (await courses).forEach((course) => {
       coursesInfraestructure.push(
         ICourseRepositoryImpl.convertCourseFromDomainToInfraestructure(course),
       );
