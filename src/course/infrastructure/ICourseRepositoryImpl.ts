@@ -139,7 +139,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return lessonDomain;
   }
 
-  private convertCourseFromDomainToInfraestructure(courseDomain: Course) {
+  static convertCourseFromDomainToInfraestructure(courseDomain: Course) {
     const courseInfraestructure: CourseInfraestructure =
       CourseInfraestructure.create(
         courseDomain.getCourseId().getId(),
@@ -154,9 +154,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return courseInfraestructure;
   }
 
-  private convertLessonFromDomainToInfraestructure(
-    lessonDomain: Array<Lesson>,
-  ) {
+  static convertLessonFromDomainToInfraestructure(lessonDomain: Array<Lesson>) {
     const lessonInfraestructure = new Array<LessonInfraestructure>();
     if (lessonDomain != null) {
       lessonDomain.forEach((lesson) => {

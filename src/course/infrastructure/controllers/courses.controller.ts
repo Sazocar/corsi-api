@@ -28,8 +28,12 @@ export class CoursesController {
   ) {}
 
   @Get()
-  findCourses() {
-    return this.courseRepo.findCourses();
+  async findCourses() {
+    const courses = await this.courseRepo.findCourses();
+    courses.forEach((course) => {
+      ICourseRepositoryImpl.convertCourseFromDomainToInfraestructure(course);
+    });
+    return courses;
   }
 
   // @Get(':id')
