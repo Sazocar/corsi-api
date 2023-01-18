@@ -1,5 +1,7 @@
 import { LessonId } from './value_objects/idlesson';
 import { LessonTitle } from './value_objects/lessonTitle';
+import { DescriptionLesson } from './value_objects/lessondescription';
+import { Videolesson } from './value_objects/lessonvideo';
 export class Lesson {
   private _lessonDescription: DescriptionLesson;
   private _videolesson: Videolesson;

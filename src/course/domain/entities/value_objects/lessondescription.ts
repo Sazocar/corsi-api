@@ -1,4 +1,4 @@
-class DescriptionLesson {
+export class DescriptionLesson {
   private description: string;
   constructor(description: string) {
     if (description.length <= 2000) {
