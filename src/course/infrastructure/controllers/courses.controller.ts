@@ -17,9 +17,7 @@ import { CoursesService } from '../services/courses.service';
 import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 
-@ApiBearerAuth()
 @ApiTags('Courses')
-@UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
   constructor(
@@ -57,11 +55,16 @@ export class CoursesController {
   findkeyword(@Param('keyword') keyword: string) {
     return this.coursesServices.getCoursebykeyword(keyword);
   }
+
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
   @Post()
   createCourse(@Body() payload: CreateCourseDto) {
     return this.coursesServices.createCourse(payload);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -70,6 +73,8 @@ export class CoursesController {
     return this.coursesServices.updateCourse(id, payload);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Put(':id/changestate')
   changestated(
     @Param('id', ParseIntPipe) id: number,
@@ -90,6 +95,8 @@ export class CoursesController {
     return this.coursesServices.ChangeState(id, Aux);
   }
 */
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.coursesServices.deleteCourse(id);
