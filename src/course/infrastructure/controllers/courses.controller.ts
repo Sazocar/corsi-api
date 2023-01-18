@@ -32,10 +32,17 @@ export class CoursesController {
     return this.courseRepo.findCourses();
   }
 
+  // @Get(':id')
+  // findOne(@Param('id', ParseIntPipe) id: number) {
+  //   return this.coursesServices.getCourse(id);
+  // }
+
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.coursesServices.getCourse(id);
+  findOne(@Param('id') id: string) {
+    const courseId = new CourseID(id);
+    return this.courseRepo.findCourse(courseId);
   }
+
   @Get('/categories/:category')
   findcategory(@Param('category') category: string) {
     return this.coursesServices.getCoursebycategory(category);
