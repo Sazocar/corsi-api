@@ -17,9 +17,9 @@ import { CoursesService } from '../services/courses.service';
 import { ICourseRepositoryImpl } from '../ICourseRepositoryImpl';
 import { CourseID } from 'src/shared/value_objects/idcourse';
 
-@ApiBearerAuth()
+// @ApiBearerAuth()
 @ApiTags('Courses')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
   constructor(
