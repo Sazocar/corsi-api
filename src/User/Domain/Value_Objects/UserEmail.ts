@@ -1,6 +1,7 @@
 export class UserEmail {
   private email: string;
-  UserEmail(email: string) {
+
+  constructor(email: string) {
     this.email = email;
   }
 

@@ -1,4 +1,4 @@
-class DescriptionCourse {
+export class DescriptionCourse {
   private descriptionCourse: string;
   DescriptionCourse(description: string) {
     if (description.length <= 250) {

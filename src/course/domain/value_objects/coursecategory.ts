@@ -1,4 +1,4 @@
-enum Coursecategory {
+export enum Coursecategory {
   programacion,
   idiomas,
   matematicas,

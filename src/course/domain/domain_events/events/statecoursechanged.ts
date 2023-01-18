@@ -1,11 +1,16 @@
-import { Course } from 'src/course/infrastructure/entities/course';
+import { UserEmail } from 'src/User/Domain/Value_Objects/userEmail';
+import { Course } from '../../course';
 import { DomainEvent } from 'src/shared/events/events';
+import { GetEmails } from '../../domain service/getemails';
+import { IrepositoryUser } from 'src/User/Domain/IrepositoryUser';
+import { Icourserepository } from '../../courserepository';
+import { User } from 'src/auth/entities/user.entity';
 
 export class CourseStateChanged extends DomainEvent {
   course: Course;
-  constructor(c: Course, s: CourseState) {
+  emails: Array<UserEmail>;
+  constructor(c: Course) {
     super();
-    c.state = s.toString();
     this.course = c;
     this.time = new Date();
   }

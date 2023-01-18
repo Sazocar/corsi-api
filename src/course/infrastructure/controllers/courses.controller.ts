@@ -13,8 +13,8 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateCourseDto, UpdateCourseDto } from '../dtos/course.dto';
-import { Course } from '../entities/course';
 import { CoursesService } from '../services/courses.service';
+import { GetEmails } from 'src/course/domain/domain service/getemails';
 
 @ApiBearerAuth()
 @ApiTags('Courses')
@@ -52,7 +52,6 @@ export class CoursesController {
   ) {
     return this.coursesServices.updateCourse(id, payload);
   }
-
   @Put(':id/changestate')
   changestated(
     @Param('id', ParseIntPipe) id: number,

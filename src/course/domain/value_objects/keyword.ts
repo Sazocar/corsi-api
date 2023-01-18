@@ -1,4 +1,4 @@
-class Keyword {
+export class Keyword {
   keyword: string;
   constructor(s: string) {
     if (s.length <= 25) {
