@@ -14,10 +14,16 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     @InjectRepository(CourseInfraestructure)
     private courseRepo: Repository<CourseInfraestructure>,
   ) {}
-  findCourses() {
-    return this.courseRepo.find({
+
+  async findCourses() {
+    const courseInfreaestructure = await this.courseRepo.find({
       relations: ['lessons'],
     });
+    const coursesDomain = new Array<Course>();
+    courseInfreaestructure.forEach((course) =>
+      coursesDomain.push(this.convertCourseFromInfraestructureToDomain(course)),
+    );
+    return coursesDomain;
   }
 
   async findCourse(courseId: CourseID) {
@@ -29,10 +35,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       throw new NotFoundException(
         `Course with id #${courseId.getId()} not found`,
       );
-    } else {
-      //var courses =
     }
-    return course;
+    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
+    return courseDomain;
   }
 
   async findPublishedCourses() {
@@ -42,7 +47,8 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (!courses) {
       throw new NotFoundException(`Courses not found`);
     }
-    return courses;
+    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
+    return courseDomain;
   }
 
   async findCoursesByCategory(categories: string) {
@@ -53,7 +59,8 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (!course) {
       throw new NotFoundException('Courses not found');
     }
-    return course;
+    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
+    return courseDomain;
   }
 
   async findCourseByKeywords(keywords: string) {
@@ -64,7 +71,8 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     if (!course) {
       throw new NotFoundException('Course not found');
     }
-    return course;
+    const courseDomain = this.convertCourseFromInfraestructureToDomain(course);
+    return courseDomain;
   }
 
   //   updateCourse(course: Course) {
@@ -75,9 +83,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
   //     throw new Error('Method not implemented.');
   //   }
 
-  convertCourseFromInfraestructureToDomain(
+  private convertCourseFromInfraestructureToDomain(
     courseInfraestructure: CourseInfraestructure,
-  ): Course {
+  ) {
     const courseDomain: Course = Course.create(
       courseInfraestructure.imageUrl,
       courseInfraestructure.description,
@@ -94,9 +102,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return courseDomain;
   }
 
-  convertLessonFromInfraestructureToDomain(
+  private convertLessonFromInfraestructureToDomain(
     lessonInfraestructure: Array<LessonInfraestructure>,
-  ): Array<Lesson> {
+  ) {
     const lessonDomain = new Array<Lesson>();
     lessonInfraestructure.forEach((lesson) => {
       lessonDomain.push(
@@ -106,9 +114,7 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return lessonDomain;
   }
 
-  convertCourseFromDomainToInfraestructure(
-    courseDomain: Course,
-  ): CourseInfraestructure {
+  private convertCourseFromDomainToInfraestructure(courseDomain: Course) {
     const courseInfraestructure: CourseInfraestructure =
       CourseInfraestructure.create(
         courseDomain.getCourseId().getId(),
@@ -123,9 +129,9 @@ export class ICourseRepositoryImpl implements ICourseRepository {
     return courseInfraestructure;
   }
 
-  convertLessonFromDomainToInfraestructure(
+  private convertLessonFromDomainToInfraestructure(
     lessonDomain: Array<Lesson>,
-  ): Array<LessonInfraestructure> {
+  ) {
     const lessonInfraestructure = new Array<LessonInfraestructure>();
     lessonDomain.forEach((lesson) => {
       lessonInfraestructure.push(
