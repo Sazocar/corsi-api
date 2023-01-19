@@ -1,7 +1,7 @@
 export class DescriptionCourse {
   private descriptionCourse: string;
   constructor(description: string) {
-    if (description.length <= 250) {
+    if (description.length <= 99999999) {
       this.descriptionCourse = description;
     } else {
       throw console.error('la descrpcion es muy larga');
