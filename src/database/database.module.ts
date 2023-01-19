@@ -1,19 +1,19 @@
 import { Module, Global } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigType } from '@nestjs/config';
-import { Client } from 'pg';
+import { ConfigModule } from '@nestjs/config';
 
 @Global()
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'root',
-      password: '123456',
-      database: 'corsi_db',
-      entities: [],
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [__dirname + '../**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
     }),
