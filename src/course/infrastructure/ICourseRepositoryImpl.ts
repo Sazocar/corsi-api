@@ -161,10 +161,10 @@ export class ICourseRepositoryImpl implements ICourseRepository {
       lessonDomain.forEach((lesson) => {
         lessonInfraestructure.push(
           LessonInfraestructure.create(
+            lesson.getLessonTitle().getTitle(),
             lesson.getlessonDescription().getDescription(),
             lesson.getvideolesson().getVideo(),
             lesson.getlessonid().getId(),
-            lesson.getLessonTitle().getTitle(),
           ),
         );
       });
