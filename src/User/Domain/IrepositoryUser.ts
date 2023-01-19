@@ -1,3 +1,5 @@
+
+/*
 import { UserId } from 'src/shared/value_objects/UserId';
 import { User } from './User';
 
@@ -8,3 +10,4 @@ interface IrepositoryUser {
   delete(user: User): void;
   update(id: UserId, user: User): void;
 }
+*/
